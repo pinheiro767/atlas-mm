@@ -1,80 +1,69 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ultra Atlas MMSS</title>
-  <link rel="manifest" href="./manifest.json" />
-  <link rel="stylesheet" href="./style.css" />
+  <link rel="manifest" href="./manifest.json">
+  <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
-  <header class="topbar">
+
+<header class="topbar">
+  <h1>Ultra Atlas MMSS</h1>
+  <button id="btnInstalar">📲 Baixe o app</button>
+</header>
+
+<main>
+
+  <select id="secaoSelect"></select>
+  <input id="buscaInput" type="search" placeholder="Buscar estrutura ou número">
+
+  <div class="viewer">
+    <button id="btnAnterior">⬅️</button>
+
     <div>
-      <h1>Ultra Atlas MMSS</h1>
-      <p>Atlas virtual anatômico interativo</p>
+      <img id="imagem" src="./imagens/1.png" alt="Imagem anatômica">
+      <p id="contador">1 / 159</p>
     </div>
-    <button id="btnInstalar" class="install">📲 Baixe o app</button>
-  </header>
 
-  <nav class="tabs">
-    <button data-tab="atlas" class="active">Atlas</button>
-    <button data-tab="roteiro">Roteiro</button>
-    <button data-tab="info">Relações</button>
-    <button data-tab="prova">Modo prova</button>
-  </nav>
+    <button id="btnProxima">➡️</button>
+  </div>
 
-  <main>
-    <section id="tab-atlas" class="tab active">
-      <div class="toolbar">
-        <select id="secaoSelect"></select>
-        <input id="buscaInput" type="search" placeholder="Buscar estrutura..." />
-        <button id="btnVoz">🎙️ Voz</button>
-        <button id="btnPDF">📄 Gerar PDF</button>
-      </div>
+  <h2 id="legenda">Imagem 1</h2>
 
-      <div class="viewer">
-        <button id="btnAnterior" class="navbtn">⬅</button>
+  <div class="actions">
+    <button id="btnAudio">🔊 Ouvir</button>
+    <button id="btnInfo">ℹ️ Relações</button>
+    <button id="btnPDF">📄 PDF</button>
+    <button id="btnLimparZoom">🔍 Reset zoom</button>
+    <button id="btnVoz">🎙️ Voz</button>
+  </div>
 
-        <div class="image-card">
-          <img id="imagem" src="./imagens/1.png" alt="Imagem anatômica" />
-          <div class="counter" id="contador">1 / 159</div>
-        </div>
+  <section id="infoBox"></section>
 
-        <button id="btnProxima" class="navbtn">➡</button>
-      </div>
+  <section>
+    <h2>Roteiro</h2>
+    <div id="roteiroLista"></div>
+  </section>
 
-      <h2 id="legenda">Imagem 1</h2>
+  <section>
+    <h2>Relações e comparações</h2>
+    <div id="relacoesLista"></div>
+  </section>
 
-      <div class="actions">
-        <button id="btnAudio">🔊 Ouvir</button>
-        <button id="btnInfo">ℹ️ Relações rápidas</button>
-        <button id="btnLimparZoom">🔍 Reset zoom</button>
-      </div>
+  <section>
+    <h2>Modo prova</h2>
+    <button id="btnIniciarProva">🧪 Iniciar prova</button>
+    <button id="btnRevelar">👁️ Mostrar resposta</button>
+    <h3 id="respostaProva"></h3>
+  </section>
 
-      <article id="infoBox" class="info-box"></article>
-    </section>
+</main>
 
-    <section id="tab-roteiro" class="tab">
-      <h2>Sequência oficial do roteiro</h2>
-      <div id="roteiroLista" class="cards"></div>
-    </section>
+<script src="./dados.js"></script>
+<script src="./app.js"></script>
 
-    <section id="tab-info" class="tab">
-      <h2>Relação e comparação das estruturas</h2>
-      <div id="relacoesLista" class="cards"></div>
-    </section>
-
-    <section id="tab-prova" class="tab">
-      <h2>Modo prova prática</h2>
-      <p>A imagem aparece sem legenda. Tente identificar antes de revelar.</p>
-      <button id="btnIniciarProva">🧪 Iniciar prova</button>
-      <button id="btnRevelar">👁️ Mostrar resposta</button>
-      <h3 id="respostaProva"></h3>
-    </section>
-  </main>
-
-  <script src="./dados.js"></script>
-  <script src="./app.js"></script>
 </body>
 </html>
