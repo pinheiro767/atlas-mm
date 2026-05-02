@@ -1,18 +1,21 @@
 {
   "name": "Ultra Atlas MMSS",
-  "short_name": "Atlas",
-  "start_url": "index.html",
+  "short_name": "Atlas MMSS",
+  "description": "Atlas virtual anatômico interativo de membros superiores",
+  "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#000000",
+  "orientation": "any",
+  "background_color": "#070b12",
   "theme_color": "#00c3ff",
   "icons": [
     {
-      "src": "icones/icon-192.png",
+      "src": "./icones/icon-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "icones/icon-512.png",
+      "src": "./icones/icon-512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
