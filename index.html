@@ -3,107 +3,76 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>Ultra Atlas MMSS</title>
-
   <link rel="manifest" href="./manifest.json" />
   <link rel="stylesheet" href="./style.css" />
 </head>
 
 <body>
-  <header class="app-header">
+  <header class="topbar">
     <div>
       <h1>Ultra Atlas MMSS</h1>
-      <p>Atlas Virtual Interativo de Anatomia Topográfica</p>
+      <p>Atlas virtual anatômico interativo</p>
     </div>
-
-    <button id="btnInstall" class="install-btn">📲 Baixe o app</button>
+    <button id="btnInstalar" class="install">📲 Baixe o app</button>
   </header>
 
   <nav class="tabs">
-    <button class="tab active" data-view="atlas">Atlas</button>
-    <button class="tab" data-view="roteiro">Roteiro</button>
-    <button class="tab" data-view="comparacoes">Relações e Comparações</button>
-    <button class="tab" data-view="prova">Modo Prova</button>
+    <button data-tab="atlas" class="active">Atlas</button>
+    <button data-tab="roteiro">Roteiro</button>
+    <button data-tab="info">Relações</button>
+    <button data-tab="prova">Modo prova</button>
   </nav>
 
   <main>
-    <!-- ATLAS -->
-    <section id="view-atlas" class="view active-view">
+    <section id="tab-atlas" class="tab active">
       <div class="toolbar">
-        <select id="sectionSelect"></select>
-        <input id="searchInput" type="search" placeholder="Buscar estrutura, seção ou número..." />
-        <button id="btnVoice">🎤 Voz</button>
-        <button id="btnPDF">📄 PDF</button>
+        <select id="secaoSelect"></select>
+        <input id="buscaInput" type="search" placeholder="Buscar estrutura..." />
+        <button id="btnVoz">🎙️ Voz</button>
+        <button id="btnPDF">📄 Gerar PDF</button>
       </div>
 
-      <section class="atlas-layout">
-        <aside class="thumbs" id="thumbList"></aside>
+      <div class="viewer">
+        <button id="btnAnterior" class="navbtn">⬅</button>
 
-        <article class="viewer-card">
-          <div class="image-stage" id="imageStage">
-            <img id="mainImage" src="./imagens/1.png" alt="Imagem anatômica do atlas" />
-          </div>
-
-          <div class="viewer-info">
-            <span id="counter">1 / 159</span>
-            <h2 id="title">Imagem 1</h2>
-            <p id="sectionName">Regiões</p>
-          </div>
-
-          <div class="controls">
-            <button id="btnPrev">⬅️ Anterior</button>
-            <button id="btnNext">Próxima ➡️</button>
-            <button id="btnSpeak">🔊 Ouvir</button>
-            <button id="btnZoomIn">🔍 +</button>
-            <button id="btnZoomOut">🔎 -</button>
-            <button id="btnResetZoom">↩️ Reset</button>
-          </div>
-
-          <div class="quick-card">
-            <h3>Informações rápidas</h3>
-            <p><strong>Relações:</strong> <span id="relations"></span></p>
-            <p><strong>Comparação:</strong> <span id="comparison"></span></p>
-            <p><strong>Dica de identificação:</strong> <span id="tip"></span></p>
-          </div>
-        </article>
-      </section>
-    </section>
-
-    <!-- ROTEIRO -->
-    <section id="view-roteiro" class="view">
-      <h2>Roteiro oficial do atlas</h2>
-      <div id="routeList" class="route-list"></div>
-    </section>
-
-    <!-- COMPARAÇÕES -->
-    <section id="view-comparacoes" class="view">
-      <h2>Relações e comparações rápidas</h2>
-      <div id="comparisonList" class="comparison-list"></div>
-    </section>
-
-    <!-- PROVA -->
-    <section id="view-prova" class="view">
-      <h2>Modo Prova</h2>
-      <p>Observe a imagem, tente responder e depois clique em “Mostrar resposta”.</p>
-
-      <div class="exam-card">
-        <img id="examImage" src="./imagens/1.png" alt="Imagem para prova" />
-        <h3 id="examQuestion">Qual estrutura está representada?</h3>
-        <p id="examAnswer" class="hidden-answer"></p>
-
-        <div class="controls">
-          <button id="btnExamPrev">⬅️ Anterior</button>
-          <button id="btnShowAnswer">Mostrar resposta</button>
-          <button id="btnExamNext">Próxima ➡️</button>
+        <div class="image-card">
+          <img id="imagem" src="./imagens/1.png" alt="Imagem anatômica" />
+          <div class="counter" id="contador">1 / 159</div>
         </div>
+
+        <button id="btnProxima" class="navbtn">➡</button>
       </div>
+
+      <h2 id="legenda">Imagem 1</h2>
+
+      <div class="actions">
+        <button id="btnAudio">🔊 Ouvir</button>
+        <button id="btnInfo">ℹ️ Relações rápidas</button>
+        <button id="btnLimparZoom">🔍 Reset zoom</button>
+      </div>
+
+      <article id="infoBox" class="info-box"></article>
+    </section>
+
+    <section id="tab-roteiro" class="tab">
+      <h2>Sequência oficial do roteiro</h2>
+      <div id="roteiroLista" class="cards"></div>
+    </section>
+
+    <section id="tab-info" class="tab">
+      <h2>Relação e comparação das estruturas</h2>
+      <div id="relacoesLista" class="cards"></div>
+    </section>
+
+    <section id="tab-prova" class="tab">
+      <h2>Modo prova prática</h2>
+      <p>A imagem aparece sem legenda. Tente identificar antes de revelar.</p>
+      <button id="btnIniciarProva">🧪 Iniciar prova</button>
+      <button id="btnRevelar">👁️ Mostrar resposta</button>
+      <h3 id="respostaProva"></h3>
     </section>
   </main>
-
-  <footer>
-    <p>Ultra Atlas MMSS — PWA acadêmico para estudo, projeção e impressão.</p>
-  </footer>
 
   <script src="./dados.js"></script>
   <script src="./app.js"></script>
