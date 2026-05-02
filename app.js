@@ -1,15 +1,13 @@
-const TOTAL_IMAGENS = 159;
-
 let imagemAtual = 1;
-let zoomAtivo = false;
-let deferredPrompt = null;
+let modoProva = false;
+const totalImagens = 159;
 
 const secoes = [
-  { nome: "Regiões", inicio: 1, fim: 21 },
-  { nome: "Estruturas fasciais", inicio: 22, fim: 38 },
+  { nome: "Regiões", inicio: 1, fim: 5 },
+  { nome: "Fáscias", inicio: 6, fim: 38 },
   { nome: "Regiões da axila", inicio: 39, fim: 46 },
   { nome: "Vasos axilares", inicio: 47, fim: 69 },
-  { nome: "Artérias do braço e do antebraço", inicio: 70, fim: 105 },
+  { nome: "Artérias do braço e antebraço", inicio: 70, fim: 105 },
   { nome: "Drenagem venosa superficial", inicio: 106, fim: 129 },
   { nome: "Drenagem venosa profunda", inicio: 130, fim: 159 }
 ];
@@ -18,101 +16,53 @@ const atlasImage = document.getElementById("atlasImage");
 const tituloImagem = document.getElementById("tituloImagem");
 const secaoAtual = document.getElementById("secaoAtual");
 const secaoSelect = document.getElementById("secaoSelect");
-const buscarInput = document.getElementById("buscarInput");
-const observacao = document.getElementById("observacao");
+const buscaInput = document.getElementById("buscaInput");
+const listaRoteiro = document.getElementById("listaRoteiro");
+const infoEstrutura = document.getElementById("infoEstrutura");
 
-const btnVoltar = document.getElementById("btnVoltar");
-const btnAvancar = document.getElementById("btnAvancar");
-const btnZoom = document.getElementById("btnZoom");
-const btnLeitura = document.getElementById("btnLeitura");
-const btnPDF = document.getElementById("btnPDF");
-const btnSalvarObs = document.getElementById("btnSalvarObs");
-const btnInstall = document.getElementById("btnInstall");
-
-function obterSecao(numero) {
+function encontrarSecao(numero) {
   return secoes.find(secao => numero >= secao.inicio && numero <= secao.fim);
 }
 
-function chaveObservacao(numero) {
-  return `observacao_imagem_${numero}`;
-}
-
-function salvarObservacaoAtual() {
-  localStorage.setItem(chaveObservacao(imagemAtual), observacao.value);
-  alert("Observação salva!");
-}
-
-function carregarObservacaoAtual() {
-  observacao.value = localStorage.getItem(chaveObservacao(imagemAtual)) || "";
-}
-
-function atualizarTela() {
+function atualizarImagem() {
   atlasImage.src = `./imagens/${imagemAtual}.png`;
-  atlasImage.alt = `Imagem ${imagemAtual}`;
+  atlasImage.alt = `Imagem anatômica ${imagemAtual}`;
 
-  tituloImagem.textContent = `Imagem ${imagemAtual} de ${TOTAL_IMAGENS}`;
+  const secao = encontrarSecao(imagemAtual);
 
-  const secao = obterSecao(imagemAtual);
+  if (modoProva) {
+    tituloImagem.textContent = "Qual estrutura?";
+  } else {
+    tituloImagem.textContent = `Imagem ${imagemAtual} de ${totalImagens}`;
+  }
+
   secaoAtual.textContent = secao ? secao.nome : "";
-
-  secaoSelect.value = secao ? secao.inicio : 1;
-
-  carregarObservacaoAtual();
-
-  zoomAtivo = false;
-  atlasImage.classList.remove("zoomed");
+  atualizarInfo();
 }
 
-function avancarImagem() {
-  if (imagemAtual < TOTAL_IMAGENS) {
+function proximaImagem() {
+  if (imagemAtual < totalImagens) {
     imagemAtual++;
-    atualizarTela();
+    modoProva = false;
+    atualizarImagem();
   }
 }
 
-function voltarImagem() {
+function imagemAnterior() {
   if (imagemAtual > 1) {
     imagemAtual--;
-    atualizarTela();
+    modoProva = false;
+    atualizarImagem();
   }
 }
 
 function irParaImagem(numero) {
   const n = Number(numero);
-
-  if (n >= 1 && n <= TOTAL_IMAGENS) {
+  if (n >= 1 && n <= totalImagens) {
     imagemAtual = n;
-    atualizarTela();
+    modoProva = false;
+    atualizarImagem();
   }
-}
-
-function alternarZoom() {
-  zoomAtivo = !zoomAtivo;
-  atlasImage.classList.toggle("zoomed", zoomAtivo);
-}
-
-function leituraImagem() {
-  const textoObs = observacao.value.trim();
-
-  const texto = textoObs
-    ? `Imagem ${imagemAtual}. ${secaoAtual.textContent}. Observações: ${textoObs}`
-    : `Imagem ${imagemAtual}. ${secaoAtual.textContent}.`;
-
-  const fala = new SpeechSynthesisUtterance(texto);
-  fala.lang = "pt-BR";
-  fala.rate = 0.95;
-
-  speechSynthesis.cancel();
-  speechSynthesis.speak(fala);
-}
-
-function gerarPDF() {
-  salvarObservacaoSilenciosa();
-  window.print();
-}
-
-function salvarObservacaoSilenciosa() {
-  localStorage.setItem(chaveObservacao(imagemAtual), observacao.value);
 }
 
 function carregarSecoes() {
@@ -124,45 +74,98 @@ function carregarSecoes() {
   });
 }
 
+function carregarRoteiro() {
+  listaRoteiro.innerHTML = "";
+
+  secoes.forEach(secao => {
+    const div = document.createElement("div");
+    div.className = "item-roteiro";
+    div.innerHTML = `
+      <strong>${secao.nome}</strong><br>
+      Imagens ${secao.inicio} até ${secao.fim}
+    `;
+    div.onclick = () => {
+      mostrarAba("atlas");
+      irParaImagem(secao.inicio);
+    };
+    listaRoteiro.appendChild(div);
+  });
+}
+
+function atualizarInfo() {
+  const secao = encontrarSecao(imagemAtual);
+
+  infoEstrutura.innerHTML = `
+    <strong>Imagem:</strong> ${imagemAtual}<br>
+    <strong>Seção:</strong> ${secao ? secao.nome : "Não definida"}<br><br>
+    <strong>Relação anatômica rápida:</strong><br>
+    Esta imagem pertence ao bloco "${secao ? secao.nome : ""}" do roteiro prático de Anatomia Topográfica de MMSS.<br><br>
+    <strong>Comparação:</strong><br>
+    Compare esta estrutura com as imagens anteriores e posteriores para reconhecer continuidade, localização, profundidade e relação topográfica.
+  `;
+}
+
+function mostrarAba(nome) {
+  document.querySelectorAll(".aba").forEach(aba => aba.classList.remove("ativa"));
+
+  if (nome === "atlas") document.getElementById("abaAtlas").classList.add("ativa");
+  if (nome === "roteiro") document.getElementById("abaRoteiro").classList.add("ativa");
+  if (nome === "relacoes") document.getElementById("abaRelacoes").classList.add("ativa");
+}
+
+function ouvirImagem() {
+  const secao = encontrarSecao(imagemAtual);
+  const texto = modoProva
+    ? `Modo prova. Observe a imagem ${imagemAtual} e identifique a estrutura.`
+    : `Imagem ${imagemAtual}. Seção: ${secao ? secao.nome : ""}.`;
+
+  const fala = new SpeechSynthesisUtterance(texto);
+  fala.lang = "pt-BR";
+  speechSynthesis.cancel();
+  speechSynthesis.speak(fala);
+}
+
+function ativarModoProva() {
+  modoProva = !modoProva;
+  mostrarAba("atlas");
+  atualizarImagem();
+}
+
+function toggleZoom() {
+  atlasImage.classList.toggle("zoom");
+}
+
+function gerarPDF() {
+  window.print();
+}
+
+function instalarApp() {
+  alert("No celular, abra o menu do navegador e escolha: Adicionar à tela inicial.");
+}
+
 secaoSelect.addEventListener("change", () => {
   irParaImagem(secaoSelect.value);
 });
 
-buscarInput.addEventListener("change", () => {
-  irParaImagem(buscarInput.value);
-  buscarInput.value = "";
-});
+buscaInput.addEventListener("input", () => {
+  const valor = buscaInput.value.trim();
 
-btnAvancar.addEventListener("click", avancarImagem);
-btnVoltar.addEventListener("click", voltarImagem);
-btnZoom.addEventListener("click", alternarZoom);
-btnLeitura.addEventListener("click", leituraImagem);
-btnPDF.addEventListener("click", gerarPDF);
-btnSalvarObs.addEventListener("click", salvarObservacaoAtual);
-
-document.addEventListener("keydown", (event) => {
-  if (event.key === "ArrowRight") avancarImagem();
-  if (event.key === "ArrowLeft") voltarImagem();
-});
-
-window.addEventListener("beforeinstallprompt", (event) => {
-  event.preventDefault();
-  deferredPrompt = event;
-  btnInstall.style.display = "inline-block";
-});
-
-btnInstall.addEventListener("click", async () => {
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    deferredPrompt = null;
-  } else {
-    alert("No celular, abra o menu do navegador e escolha: Adicionar à tela inicial.");
+  if (/^\d+$/.test(valor)) {
+    irParaImagem(valor);
   }
 });
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowRight") proximaImagem();
+  if (e.key === "ArrowLeft") imagemAnterior();
+});
+
+document.getElementById("btnInstalar").addEventListener("click", instalarApp);
 
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("./sw.js");
 }
 
 carregarSecoes();
-atualizarTela();
+carregarRoteiro();
+atualizarImagem();
