@@ -1,8 +1,8 @@
 const TOTAL_IMAGENS = 159;
 
 const SECOES = [
-  { nome: "Regiões", inicio: 1, fim: 21 },
-  { nome: "Estruturas fasciais", inicio: 22, fim: 38 },
+  { nome: "Regiões", inicio: 1, fim: 5 },
+  { nome: "Estruturas fasciais", inicio: 6, fim: 38 },
   { nome: "Regiões da axila", inicio: 39, fim: 46 },
   { nome: "Vasos axilares", inicio: 47, fim: 69 },
   { nome: "Artérias do braço e do antebraço", inicio: 70, fim: 105 },
