@@ -1,40 +1,75 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ultra Atlas MMSS</title>
-  <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
+  <header class="topo">
+    <div>
+      <h1>Ultra Atlas MMSS</h1>
+      <p>Anatomia Topográfica Interativa</p>
+    </div>
+    <button id="btnInstalar">📲 Baixe o app</button>
+  </header>
 
-<header>
-  <h1>Ultra Atlas MMSS</h1>
-</header>
+  <nav class="menu">
+    <button onclick="irSecao('atlas')">Atlas</button>
+    <button onclick="irSecao('roteiro')">Roteiro</button>
+    <button onclick="irSecao('comparacoes')">Relações e Comparações</button>
+    <button onclick="alternarProva()">Modo Prova</button>
+    <button onclick="gerarPDF()">Gerar PDF</button>
+  </nav>
 
-<main>
+  <main>
+    <section id="atlas" class="painel ativo">
+      <div class="controles">
+        <select id="filtroSecao" onchange="filtrarSecao()"></select>
+        <input id="busca" placeholder="Buscar estrutura..." oninput="buscarEstrutura()" />
+      </div>
 
-  <img id="imagem" src="imagens/1.png">
+      <div class="visualizador">
+        <button onclick="anterior()">⬅</button>
 
-  <h2 id="legenda">Imagem 1</h2>
+        <div class="card-imagem">
+          <img id="imagemAtlas" src="imagens/1.png" alt="Imagem do atlas" />
+          <h2 id="tituloImagem"></h2>
+          <p id="secaoImagem"></p>
 
-  <div class="botoes">
-    <button onclick="anterior()">⬅️</button>
-    <button onclick="proxima()">➡️</button>
-    <button onclick="ouvir()">🔊 Ouvir</button>
-    <button onclick="modoProva()">🧪 Prova</button>
-    <button onclick="gerarPDF()">📄 PDF</button>
-    <button id="instalar">📲 Instalar</button>
-  </div>
+          <div class="acoes">
+            <button onclick="ouvir()">🔊 Ouvir</button>
+            <button onclick="iniciarVoz()">🎤 Comando de voz</button>
+            <button onclick="alternarZoom()">🔍 Zoom</button>
+            <button onclick="mostrarResposta()">👁 Mostrar legenda</button>
+          </div>
 
-  <div id="info"></div>
+          <div id="descricao"></div>
+        </div>
 
-</main>
+        <button onclick="proxima()">➡</button>
+      </div>
+    </section>
 
-<script src="dados.js"></script>
-<script src="app.js"></script>
+    <section id="roteiro" class="painel">
+      <h2>Roteiro Oficial</h2>
+      <div id="listaRoteiro"></div>
+    </section>
 
+    <section id="comparacoes" class="painel">
+      <h2>Relações e Comparações Rápidas</h2>
+      <div id="listaComparacoes"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Ultra Atlas MMSS — PWA para estudo, projeção e revisão prática.</p>
+  </footer>
+
+  <script src="dados.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
