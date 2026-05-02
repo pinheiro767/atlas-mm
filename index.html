@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ultra Atlas MMSS</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+  <h1>Ultra Atlas MMSS</h1>
+</header>
+
+<main>
+
+  <img id="imagem" src="imagens/1.png">
+
+  <h2 id="legenda">Imagem 1</h2>
+
+  <div class="botoes">
+    <button onclick="anterior()">⬅️</button>
+    <button onclick="proxima()">➡️</button>
+    <button onclick="ouvir()">🔊 Ouvir</button>
+    <button onclick="modoProva()">🧪 Prova</button>
+    <button onclick="gerarPDF()">📄 PDF</button>
+    <button id="instalar">📲 Instalar</button>
+  </div>
+
+  <div id="info"></div>
+
+</main>
+
+<script src="dados.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>

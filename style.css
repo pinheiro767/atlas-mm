@@ -1,0 +1,27 @@
+body {
+  font-family: Arial;
+  text-align: center;
+  background: #111;
+  color: white;
+}
+
+img {
+  width: 90%;
+  max-width: 500px;
+  border-radius: 10px;
+  margin: 20px;
+}
+
+button {
+  margin: 5px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  background: #00c3ff;
+  color: black;
+}
+
+button:hover {
+  background: #00ffcc;
+}
