@@ -36,7 +36,6 @@ function renderizar() {
   const secao = obterSecao();
 
   el.imagem.src = `./imagens/${estado.atual}.png`;
-  el.imagem.alt = dado.nome;
   el.imagem.style.transform = `scale(${estado.zoom})`;
 
   el.legenda.textContent = estado.modoProva ? "Qual estrutura?" : dado.nome;
@@ -45,45 +44,45 @@ function renderizar() {
   el.infoBox.innerHTML = `
     <h3>${dado.nome}</h3>
     <p><strong>Seção:</strong> ${secao?.nome || "Não definida"}</p>
-    <p><strong>Relações rápidas:</strong> ${dado.relacoes}</p>
+    <p><strong>Relações:</strong> ${dado.relacoes}</p>
     <p><strong>Comparação:</strong> ${dado.comparacao}</p>
   `;
-
-  el.respostaProva.textContent = "";
 }
 
 function irPara(numero) {
   const n = Number(numero);
   if (n < 1 || n > TOTAL_IMAGENS) return;
+
   estado.atual = n;
   estado.zoom = 1;
   renderizar();
 }
 
 function proxima() {
-  irPara(Math.min(estado.atual + 1, TOTAL_IMAGENS));
+  irPara(estado.atual + 1);
 }
 
 function anterior() {
-  irPara(Math.max(estado.atual - 1, 1));
-}
-
-function falar(texto) {
-  speechSynthesis.cancel();
-  const voz = new SpeechSynthesisUtterance(texto);
-  voz.lang = "pt-BR";
-  voz.rate = 0.95;
-  speechSynthesis.speak(voz);
+  irPara(estado.atual - 1);
 }
 
 function ouvirAtual() {
+  speechSynthesis.cancel();
+
   const dado = obterDado();
   const secao = obterSecao();
-  falar(`${dado.nome}. Seção: ${secao.nome}. Relações: ${dado.relacoes}. Comparação: ${dado.comparacao}.`);
+
+  const fala = new SpeechSynthesisUtterance(
+    `${dado.nome}. Seção: ${secao?.nome}. Relações: ${dado.relacoes}. Comparação: ${dado.comparacao}.`
+  );
+
+  fala.lang = "pt-BR";
+  speechSynthesis.speak(fala);
 }
 
 function alternarInfo() {
-  el.infoBox.style.display = el.infoBox.style.display === "block" ? "none" : "block";
+  el.infoBox.style.display =
+    el.infoBox.style.display === "block" ? "none" : "block";
 }
 
 function gerarPDF() {
@@ -102,21 +101,20 @@ function aumentarZoom() {
 
 function buscar() {
   const termo = el.buscaInput.value.trim().toLowerCase();
-
   if (!termo) return;
 
-  const numeroDireto = Number(termo);
-  if (numeroDireto >= 1 && numeroDireto <= TOTAL_IMAGENS) {
-    irPara(numeroDireto);
+  const numero = Number(termo);
+  if (numero >= 1 && numero <= TOTAL_IMAGENS) {
+    irPara(numero);
     return;
   }
 
-  for (const numero in DADOS) {
-    const dado = DADOS[numero];
+  for (const i in DADOS) {
+    const dado = DADOS[i];
     const texto = `${dado.nome} ${dado.relacoes} ${dado.comparacao}`.toLowerCase();
 
     if (texto.includes(termo)) {
-      irPara(numero);
+      irPara(i);
       return;
     }
   }
@@ -128,7 +126,7 @@ function carregarSecoes() {
   SECOES.forEach(secao => {
     const option = document.createElement("option");
     option.value = secao.inicio;
-    option.textContent = `${secao.nome} (${secao.inicio}–${secao.fim})`;
+    option.textContent = `${secao.nome} (${secao.inicio}-${secao.fim})`;
     el.secaoSelect.appendChild(option);
   });
 }
@@ -138,7 +136,7 @@ function carregarRoteiro() {
     <div class="card">
       <strong>${secao.nome}</strong>
       <p>Imagens ${secao.inicio} a ${secao.fim}</p>
-      <button onclick="irPara(${secao.inicio})">Abrir seção</button>
+      <button onclick="irPara(${secao.inicio})">Abrir</button>
     </div>
   `).join("");
 }
@@ -148,6 +146,7 @@ function carregarRelacoes() {
 
   for (let i = 1; i <= TOTAL_IMAGENS; i++) {
     const dado = obterDado(i);
+
     html += `
       <div class="card">
         <strong>${i}. ${dado.nome}</strong>
@@ -169,24 +168,15 @@ function iniciarProva() {
 function revelarResposta() {
   const dado = obterDado();
   el.respostaProva.textContent = `Resposta: ${dado.nome}`;
-  falar(`Resposta: ${dado.nome}`);
-}
-
-function configurarTabs() {
-  document.querySelectorAll(".tabs button").forEach(btn => {
-    btn.addEventListener("click", () => {
-      document.querySelectorAll(".tabs button").forEach(b => b.classList.remove("active"));
-      document.querySelectorAll(".tab").forEach(tab => tab.classList.remove("active"));
-
-      btn.classList.add("active");
-      $(`tab-${btn.dataset.tab}`).classList.add("active");
-    });
-  });
 }
 
 function configurarVoz() {
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (!SpeechRecognition) return;
+
+  if (!SpeechRecognition) {
+    $("btnVoz").style.display = "none";
+    return;
+  }
 
   const rec = new SpeechRecognition();
   rec.lang = "pt-BR";
@@ -197,11 +187,9 @@ function configurarVoz() {
     if (comando.includes("próxima")) proxima();
     else if (comando.includes("anterior") || comando.includes("voltar")) anterior();
     else if (comando.includes("ouvir")) ouvirAtual();
-    else if (comando.includes("prova")) iniciarProva();
-    else if (comando.includes("resposta")) revelarResposta();
     else {
       const numero = comando.match(/\d+/)?.[0];
-      if (numero) irPara(Number(numero));
+      if (numero) irPara(numero);
     }
   };
 
@@ -219,7 +207,7 @@ function configurarInstalacao() {
       estado.instalacao.prompt();
       estado.instalacao = null;
     } else {
-      alert("No iPhone: toque em Compartilhar e depois em Adicionar à Tela de Início. No Android: use o menu do navegador ou aguarde o botão de instalação aparecer.");
+      alert("No iPhone: toque em Compartilhar e depois em Adicionar à Tela de Início.");
     }
   };
 }
@@ -237,13 +225,6 @@ function configurarEventos() {
   el.imagem.onclick = aumentarZoom;
   el.buscaInput.oninput = buscar;
   el.secaoSelect.onchange = () => irPara(el.secaoSelect.value);
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowRight") proxima();
-    if (e.key === "ArrowLeft") anterior();
-    if (e.key === "+") aumentarZoom();
-    if (e.key === "-") resetZoom();
-  });
 }
 
 function registrarServiceWorker() {
@@ -252,14 +233,13 @@ function registrarServiceWorker() {
   }
 }
 
-window.onload = () => {
+window.addEventListener("DOMContentLoaded", () => {
   carregarSecoes();
   carregarRoteiro();
   carregarRelacoes();
-  configurarTabs();
   configurarEventos();
   configurarVoz();
   configurarInstalacao();
   registrarServiceWorker();
   renderizar();
-};
+});
