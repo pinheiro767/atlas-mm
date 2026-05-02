@@ -11,48 +11,54 @@
 </head>
 
 <body>
-
   <header class="topbar">
     <div>
       <h1>Ultra Atlas MMSS</h1>
       <p>Anatomia Topográfica Interativa</p>
     </div>
 
-    <button id="btnInstall" class="install-btn">📲 Baixe o app</button>
+    <button id="btnInstalar">📲 Baixe o app</button>
   </header>
 
-  <main class="app">
+  <nav class="menu">
+    <button onclick="mostrarAba('atlas')">Atlas</button>
+    <button onclick="mostrarAba('roteiro')">Roteiro</button>
+    <button onclick="mostrarAba('relacoes')">Relações e Comparações</button>
+    <button onclick="ativarModoProva()">Modo Prova</button>
+    <button onclick="gerarPDF()">Gerar PDF</button>
+  </nav>
 
-    <section class="panel">
-
-      <div class="toolbar">
+  <main>
+    <section id="abaAtlas" class="aba ativa">
+      <div class="filtros">
         <select id="secaoSelect"></select>
-        <input id="buscarInput" type="number" min="1" max="159" placeholder="Ir para imagem..." />
+        <input id="buscaInput" type="search" placeholder="Buscar por número..." />
       </div>
 
       <h2 id="tituloImagem">Imagem 1 de 159</h2>
       <p id="secaoAtual">Regiões</p>
 
-      <div class="image-wrapper" id="imageWrapper">
-        <img id="atlasImage" src="./imagens/1.png" alt="Imagem anatômica" />
+      <div class="viewer">
+        <img id="atlasImage" src="./imagens/1.png" alt="Imagem anatômica 1" />
       </div>
 
       <div class="controls">
-        <button id="btnVoltar">⬅ Voltar</button>
-        <button id="btnAvancar">Avançar ➡</button>
-        <button id="btnZoom">🔍 Zoom</button>
-        <button id="btnLeitura">🔊 Leitura</button>
-        <button id="btnPDF">📄 Gerar PDF</button>
+        <button onclick="imagemAnterior()">← Anterior</button>
+        <button onclick="proximaImagem()">Próxima →</button>
+        <button onclick="ouvirImagem()">🔊 Ouvir</button>
+        <button onclick="toggleZoom()">🔍 Zoom</button>
       </div>
-
-      <section class="notes">
-        <label for="observacao">Observações desta imagem</label>
-        <textarea id="observacao" placeholder="Digite aqui suas observações, legendas ou identificação anatômica..."></textarea>
-        <button id="btnSalvarObs">💾 Salvar observação</button>
-      </section>
-
     </section>
 
+    <section id="abaRoteiro" class="aba">
+      <h2>Roteiro do Atlas</h2>
+      <div id="listaRoteiro"></div>
+    </section>
+
+    <section id="abaRelacoes" class="aba">
+      <h2>Relações e Comparações Rápidas</h2>
+      <div id="infoEstrutura" class="card"></div>
+    </section>
   </main>
 
   <script src="./app.js"></script>
