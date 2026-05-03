@@ -24,8 +24,9 @@
     <button onclick="mostrarAba('atlas')">Atlas</button>
     <button onclick="mostrarAba('roteiro')">Roteiro</button>
     <button onclick="mostrarAba('relacoes')">Relações e Comparações</button>
+    <button onclick="mostrarAba('saibaMais')">Saiba Mais</button>
     <button onclick="ativarModoProva()">Modo Prova</button>
-    <button onclick="gerarPDF()">Gerar PDF</button>
+    <button onclick="gerarPDFTodas()">Gerar PDF completo</button>
   </nav>
 
   <main>
@@ -48,6 +49,15 @@
         <button onclick="ouvirImagem()">🔊 Ouvir</button>
         <button onclick="toggleZoom()">🔍 Zoom</button>
       </div>
+
+      <div class="observacoes">
+        <label for="observacaoTexto">Observações da imagem</label>
+        <textarea
+          id="observacaoTexto"
+          placeholder="Digite observações, relações anatômicas, detalhes da peça..."
+        ></textarea>
+        <button onclick="salvarObservacao()">💾 Salvar observação</button>
+      </div>
     </section>
 
     <section id="abaRoteiro" class="aba">
@@ -58,6 +68,17 @@
     <section id="abaRelacoes" class="aba">
       <h2>Relações e Comparações Rápidas</h2>
       <div id="infoEstrutura" class="card"></div>
+    </section>
+
+    <section id="abaSaibaMais" class="aba">
+      <h2>Saiba Mais — Anatomia Clínica e Relações Finas</h2>
+
+      <div class="controls">
+        <button onclick="ouvirSaibaMais()">🔊 Ouvir Saiba Mais</button>
+        <button onclick="pararAudio()">⏹️ Parar áudio</button>
+      </div>
+
+      <div id="conteudoSaibaMais" class="card saiba-mais"></div>
     </section>
   </main>
 
