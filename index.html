@@ -17,16 +17,16 @@
       <p>Anatomia Topográfica Interativa</p>
     </div>
 
-    <button id="btnInstalar">📲 Baixe o app</button>
+    <button id="btnInstalar" type="button">📲 Baixe o app</button>
   </header>
 
   <nav class="menu">
-    <button onclick="mostrarAba('atlas')">Atlas</button>
-    <button onclick="mostrarAba('roteiro')">Roteiro</button>
-    <button onclick="mostrarAba('relacoes')">Relações e Comparações</button>
-    <button onclick="mostrarAba('saibaMais')">Saiba Mais</button>
-    <button onclick="ativarModoProva()">Modo Prova</button>
-    <button onclick="gerarPDFTodas()">Gerar PDF completo</button>
+    <button type="button" onclick="mostrarAba('atlas')">Atlas</button>
+    <button type="button" onclick="mostrarAba('roteiro')">Roteiro</button>
+    <button type="button" onclick="mostrarAba('relacoes')">Relações e Comparações</button>
+    <button type="button" onclick="mostrarAba('saibaMais')">Saiba Mais</button>
+    <button type="button" onclick="ativarModoProva()">Modo Prova</button>
+    <button type="button" onclick="gerarPDFTodas()">Gerar PDF completo</button>
   </nav>
 
   <main>
@@ -44,10 +44,10 @@
       </div>
 
       <div class="controls">
-        <button onclick="imagemAnterior()">← Anterior</button>
-        <button onclick="proximaImagem()">Próxima →</button>
-        <button onclick="ouvirImagem()">🔊 Ouvir</button>
-        <button onclick="toggleZoom()">🔍 Zoom</button>
+        <button type="button" onclick="imagemAnterior()">← Anterior</button>
+        <button type="button" onclick="proximaImagem()">Próxima →</button>
+        <button type="button" onclick="ouvirImagem()">🔊 Ouvir</button>
+        <button type="button" onclick="toggleZoom()">🔍 Zoom</button>
       </div>
 
       <div class="observacoes">
@@ -56,7 +56,7 @@
           id="observacaoTexto"
           placeholder="Digite observações, relações anatômicas, detalhes da peça..."
         ></textarea>
-        <button onclick="salvarObservacao()">💾 Salvar observação</button>
+        <button type="button" onclick="salvarObservacao()">💾 Salvar observação</button>
       </div>
     </section>
 
@@ -74,8 +74,8 @@
       <h2>Saiba Mais — Anatomia Clínica e Relações Finas</h2>
 
       <div class="controls">
-        <button onclick="ouvirSaibaMais()">🔊 Ouvir Saiba Mais</button>
-        <button onclick="pararAudio()">⏹️ Parar áudio</button>
+        <button type="button" onclick="ouvirSaibaMais()">🔊 Ouvir Saiba Mais</button>
+        <button type="button" onclick="pararAudio()">⏹️ Parar áudio</button>
       </div>
 
       <div id="conteudoSaibaMais" class="card saiba-mais"></div>
