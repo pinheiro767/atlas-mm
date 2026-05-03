@@ -1029,7 +1029,7 @@ Regiões palmar, dorsal, digitais palmares e digitais dorsais.
 Moore, Anatomia Orientada para a Clínica, 9ª edição.
 Netter, Atlas de Anatomia Humana, 7ª edição.
 Sobotta, Atlas de Anatomia Humana, 24ª edição.
-`;
+``;
 
 const saibaMaisEl = document.getElementById("conteudoSaibaMais");
 
@@ -1049,7 +1049,7 @@ function ouvirSaibaMais() {
 
 function pararAudio() {
   speechSynthesis.cancel();
-  }
+}
 /* ========================
    MODO PROVA
 ======================== */
