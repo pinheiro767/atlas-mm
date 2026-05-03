@@ -1,7 +1,14 @@
+/* ========================
+   ESTADO GLOBAL
+======================== */
 let imagemAtual = 1;
 let modoProva = false;
+let topicoAtual = "";
 const totalImagens = 159;
 
+/* ========================
+   SEÇÕES
+======================== */
 const secoes = [
   { nome: "Regiões", inicio: 1, fim: 5 },
   { nome: "Fáscias", inicio: 6, fim: 38 },
@@ -12,6 +19,9 @@ const secoes = [
   { nome: "Drenagem venosa profunda", inicio: 130, fim: 159 }
 ];
 
+/* ========================
+   ELEMENTOS
+======================== */
 const atlasImage = document.getElementById("atlasImage");
 const tituloImagem = document.getElementById("tituloImagem");
 const secaoAtual = document.getElementById("secaoAtual");
@@ -20,454 +30,81 @@ const buscaInput = document.getElementById("buscaInput");
 const listaRoteiro = document.getElementById("listaRoteiro");
 const infoEstrutura = document.getElementById("infoEstrutura");
 const observacaoTexto = document.getElementById("observacaoTexto");
-const conteudoSaibaMais = document.getElementById("conteudoSaibaMais");
 
-const textoSaibaMais = `
-VASOS + AXILA — LOCALIZAÇÃO EXATA E RELAÇÕES ANATÔMICAS FINAS
-Baseado em Moore, Netter e Sobotta, com orientação clínica.
-
-🔴 I. VASOS AXILARES — ARTÉRIA AXILAR
-
-📍 Localização geral:
-Continuação da artéria subclávia.
-Inicia na borda lateral da 1ª costela.
-Termina na borda inferior do músculo redondo maior, onde se torna artéria braquial.
-
-📍 Relação fundamental:
-A artéria axilar é dividida em três partes pela posição em relação ao músculo peitoral menor.
-
-🟥 1ª parte — proximal ao peitoral menor
-
-📍 Localização:
-Entre a borda lateral da 1ª costela e a borda medial do peitoral menor.
-
-🔗 Relações:
-Anterior: fáscia clavipeitoral e peitoral maior.
-Posterior: pleura e ápice do pulmão.
-Medial: veia axilar.
-Lateral: plexo braquial.
-
-🩸 Ramo:
-Artéria torácica superior.
-
-👉 Clínico:
-Risco de pneumotórax em lesões profundas.
-
-🟥 2ª parte — posterior ao peitoral menor
-
-📍 Localização:
-Profunda ao músculo peitoral menor.
-
-🔗 Relações:
-Rodeada pelos fascículos lateral, medial e posterior do plexo braquial.
-
-🩸 Ramos:
-Artéria toracoacromial.
-Artéria torácica lateral.
-
-👉 Clínico:
-Região importante em compressões neurovasculares.
-
-🟥 3ª parte — distal ao peitoral menor
-
-📍 Localização:
-Entre a borda lateral do peitoral menor e a borda inferior do redondo maior.
-
-🔗 Relações:
-Posterior: subescapular e latíssimo do dorso.
-Lateral: úmero, especialmente o colo cirúrgico.
-O nervo axilar passa nessa região.
-
-🩸 Ramos:
-Artéria subescapular.
-Artéria circunflexa anterior do úmero.
-Artéria circunflexa posterior do úmero.
-
-👉 Clínico:
-Fratura do colo cirúrgico pode lesar a artéria circunflexa posterior do úmero e o nervo axilar.
-
-🔴 II. VEIA AXILAR
-
-📍 Localização:
-Medial à artéria axilar.
-Formada pela união das veias braquiais com a veia basílica.
-
-🔗 Relações:
-Anterior: peitoral maior.
-Posterior: artéria axilar.
-Medial: parede torácica.
-
-👉 Clínico:
-Acesso venoso central.
-Risco de embolia aérea.
-
-🔴 III. ARTÉRIA BRAQUIAL
-
-📍 Localização:
-Continuação da artéria axilar.
-Percorre o sulco bicipital medial.
-
-🔗 Relações:
-Lateral: bíceps braquial.
-Medial: nervo mediano.
-Profunda: úmero.
-
-🩸 Ramos:
-Artéria braquial profunda.
-Artéria colateral ulnar superior.
-Artéria colateral ulnar inferior.
-
-👉 Clínico:
-Ponto de aferição da pressão arterial.
-Fraturas supracondilares podem causar risco de isquemia.
-
-🔴 IV. ARTÉRIAS DO ANTEBRAÇO
-
-🟥 Artéria radial
-Lateral, no lado do polegar.
-Passa anterior ao rádio.
-Torna-se superficial no punho.
-Forma principalmente o arco palmar profundo.
-
-🟥 Artéria ulnar
-Medial, no lado do dedo mínimo.
-Segue profunda aos músculos flexores.
-Forma principalmente o arco palmar superficial.
-
-🟥 Artérias interósseas
-Localizam-se ao longo da membrana interóssea.
-Dividem-se em anterior, relacionada ao compartimento flexor, e posterior, relacionada ao compartimento extensor.
-
-🔴 V. DRENAGEM VENOSA SUPERFICIAL
-
-🟥 Rede venosa dorsal
-Localiza-se no dorso da mão.
-É superficial à fáscia dorsal.
-Origina a veia cefálica lateralmente e a veia basílica medialmente.
-
-🟥 Veia cefálica
-
-📍 Localização:
-Origina-se na rede venosa dorsal da mão, no lado lateral.
-Sobe pelo lado lateral do antebraço.
-Passa anterior ao cotovelo, no sulco bicipital lateral.
-Continua no braço entre o músculo deltóide e o músculo peitoral maior.
-Penetra a fáscia clavipeitoral no triângulo deltopeitoral.
-Desemboca na veia axilar.
-
-🔗 Relações:
-Superficial: pele e tecido subcutâneo.
-Profunda: fáscia braquial.
-Próxima ao nervo cutâneo lateral do antebraço.
-
-👉 Clínico:
-Acesso venoso.
-Via para cateter venoso central.
-Mais visível em indivíduos magros.
-
-🟥 Veia basílica
-
-📍 Localização:
-Origina-se na rede venosa dorsal, no lado medial.
-Sobe pelo lado medial do antebraço.
-No braço, perfura a fáscia braquial no terço médio.
-Une-se às veias braquiais para formar a veia axilar.
-
-🔗 Relações:
-Próxima ao nervo cutâneo medial do antebraço.
-Torna-se profunda no braço, diferente da cefálica.
-
-👉 Clínico:
-Acesso venoso profundo.
-Menos visível e mais protegida.
-
-🟥 Veia intermédia do cotovelo
-
-📍 Localização:
-Na fossa cubital.
-Conecta a veia cefálica à veia basílica.
-
-🔗 Relações:
-Superficial à aponeurose bicipital.
-Profunda à artéria braquial e ao nervo mediano.
-
-👉 Clínico:
-Principal local de punção venosa.
-A aponeurose bicipital protege estruturas profundas.
-
-🔴 VI. DRENAGEM VENOSA PROFUNDA
-
-🟥 Veias digitais palmares
-Localizam-se ao lado das artérias digitais, nos dedos.
-Drenam para as veias metacarpais.
-
-🟥 Veias metacarpais palmares
-Localizam-se entre os metacarpos, profundamente na palma.
-Drenam para os arcos venosos.
-
-🟥 Arco venoso palmar superficial
-Localiza-se superficial aos tendões flexores e profundo à aponeurose palmar.
-É formado principalmente pela drenagem ulnar.
-
-🟥 Arco venoso palmar profundo
-Localiza-se profundamente aos tendões flexores, junto aos ossos metacarpais.
-Acompanha o arco arterial profundo.
-
-🟥 Veias radiais
-Acompanham a artéria radial no lado lateral do antebraço.
-
-🟥 Veias ulnares
-Acompanham a artéria ulnar no lado medial do antebraço.
-
-🟥 Veias interósseas
-Localizam-se ao longo da membrana interóssea.
-Drenam compartimentos profundos.
-
-🟥 Veias braquiais
-São veias satélites da artéria braquial, no sulco bicipital medial.
-Unem-se à veia basílica e formam a veia axilar.
-
-🟥 Veia axilar
-Localiza-se medial à artéria axilar.
-Vai da borda inferior do redondo maior até a 1ª costela.
-Continua como veia subclávia.
-
-🟥 Veia subclávia
-Localiza-se anterior ao músculo escaleno anterior e inferior à clavícula.
-Drena para a veia braquiocefálica.
-
-👉 Clínico:
-Acesso venoso central.
-Risco de pneumotórax.
-
-🔴 VII. AXILA — ANATOMIA CIRÚRGICA
-
-🟥 Ápice da axila
-Corresponde ao canal cervicoaxilar.
-Limitado pela clavícula, 1ª costela e escápula.
-Permite a passagem da artéria subclávia, que se torna axilar, e do plexo braquial.
-
-🟥 Base da axila
-Formada por pele e fáscia axilar.
-Sustentada pelo ligamento suspensor da axila.
-
-🟥 Parede anterior
-Formada por peitoral maior, peitoral menor e fáscia clavipeitoral.
-Relaciona-se com vasos torácicos.
-
-🟥 Parede posterior
-Formada por subescapular, redondo maior e latíssimo do dorso.
-Relaciona-se com a artéria subescapular.
-
-🟥 Parede medial
-Formada pela parede torácica, costelas e músculo serrátil anterior.
-Lesão do nervo torácico longo pode causar escápula alada.
-
-🟥 Parede lateral
-Formada pelo úmero, especialmente o sulco intertubercular.
-Relaciona-se com vasos e nervos do plexo braquial.
-
-🟥 Pregas axilares
-Prega anterior: peitoral maior.
-Prega posterior: latíssimo do dorso e redondo maior.
-Definem limites clínicos da axila.
-
-🔴 VIII. RELAÇÕES CRÍTICAS DA AXILA
-
-Conteúdo central:
-Artéria axilar.
-Veia axilar.
-Plexo braquial.
-Linfonodos.
-
-Relações essenciais:
-Veia axilar: mais medial e anterior.
-Artéria axilar: posição central.
-Plexo braquial: ao redor da artéria.
-
-Linfonodos axilares:
-Anterior ou peitoral.
-Posterior ou subescapular.
-Lateral ou umeral.
-Central.
-Apical.
-
-👉 Clínico:
-Câncer de mama pode metastatizar para linfonodos axilares.
-Pode haver necessidade de esvaziamento axilar.
-
-Principais correlações clínicas:
-Síndrome do desfiladeiro torácico.
-Lesão do nervo axilar em luxação do ombro.
-Trombose venosa profunda.
-Acesso venoso central.
-Dissecção axilar.
-Isquemia do membro superior.
-
-🔴 FÁSCIAS DO MEMBRO SUPERIOR
-
-🟥 1. Fáscia peitoral
-Reveste diretamente o músculo peitoral maior.
-Estende-se da clavícula ao esterno, cartilagens costais e fáscia do braço.
-Pode servir como via de disseminação de infecção torácica para a axila.
-
-🟥 2. Fáscia clavipeitoral
-Situa-se profundamente ao peitoral maior.
-Fica entre o músculo subclávio e o músculo peitoral menor.
-É atravessada pela veia cefálica, artéria toracoacromial e nervo peitoral lateral.
-Continua inferiormente como ligamento suspensor da axila.
-
-🟥 3. Membrana costocoracoide
-Parte espessada da fáscia clavipeitoral.
-Localiza-se entre o processo coracoide e a 1ª costela.
-Pode ser ponto de compressão neurovascular.
-
-🟥 4. Ligamento suspensor da axila
-Extensão inferior da fáscia clavipeitoral até a fáscia axilar.
-Mantém a concavidade da axila.
-
-🟥 5. Fáscia axilar
-Forma o assoalho da axila entre as pregas anterior e posterior.
-Relaciona-se superiormente com vasos e plexo braquial.
-
-🟥 6. Fáscia deltóidea
-Reveste o músculo deltóide.
-Origina-se na clavícula, acrômio e espinha da escápula.
-Continua inferiormente com a fáscia braquial.
-
-🟥 7 a 9. Fáscias escapulares
-Fáscia supraespinal: fossa supraespinal.
-Fáscia infraespinal: fossa infraespinal.
-Fáscia subescapular: face anterior da escápula.
-
-🟥 10. Fáscia do braço
-Envolve o braço como um cilindro.
-Divide o braço em compartimento anterior flexor e posterior extensor.
-
-🟥 11 e 12. Septos intermusculares
-Ligam a fáscia braquial ao úmero.
-Dividem compartimentos medial e lateral.
-
-🟥 13 e 14. Compartimentos do braço
-Anterior: bíceps, braquial e nervo musculocutâneo.
-Posterior: tríceps e nervo radial.
-
-🟥 15. Fáscia do antebraço
-Continuação da fáscia braquial.
-Reveste rádio e ulna.
-Forma espessamentos distais chamados retináculos.
-
-🟥 16. Membrana interóssea
-Localiza-se entre rádio e ulna.
-Transmite força e contribui para estabilidade.
-
-🟥 17 e 18. Compartimentos do antebraço
-Anterior: flexores e nervo mediano.
-Posterior: extensores e nervo radial.
-
-🟥 19. Ligamento carpal palmar
-Localiza-se superficial ao retináculo dos flexores.
-Não forma o túnel do carpo.
-
-🟥 20. Retináculo dos flexores
-Localiza-se entre tubérculo do escafoide, trapézio, pisiforme e hamato.
-Forma o túnel do carpo.
-Contém nervo mediano e tendões flexores.
-
-🟥 21 a 24. Fáscias palmares
-Fáscia palmar: cobre a palma.
-Fáscia tenar: base do polegar.
-Fáscia hipotenar: base do dedo mínimo.
-Aponeurose palmar: estrutura central espessa.
-
-🟥 25 a 27. Estruturas digitais
-Raios digitais, ligamentos metacarpais e ligamentos cutâneos.
-Contribuem para estabilidade da preensão.
-
-🟥 28. Retináculo dos extensores
-Localiza-se no dorso do punho.
-Divide seis compartimentos tendíneos.
-
-🟥 29. Fáscia dorsal da mão
-Fina e móvel.
-Permite edema dorsal visível.
-
-🟥 30. Túnel ulnar — Canal de Guyon
-Entre pisiforme e hamato.
-Contém nervo ulnar e artéria ulnar.
-Compressão pode causar mão em garra.
-
-🔴 REGIÕES DO MEMBRO SUPERIOR
-
-1. Região escapular:
-Área posterior da cintura escapular envolvendo escápula, trapézio e romboides.
-
-2. Região deltóidea:
-Recobre o músculo deltóide.
-Local de aplicação intramuscular.
-
-3. Região peitoral:
-Área anterior do tórax, incluindo peitoral maior e menor.
-Relaciona-se com acesso cirúrgico axilar e drenagem mamária.
-
-4 e 5. Região braquial anterior e posterior:
-Anterior: compartimento flexor.
-Posterior: compartimento extensor.
-Lesão do nervo radial pode causar incapacidade de extensão.
-
-6 e 7. Região cubital anterior e posterior:
-Anterior: fossa cubital.
-Posterior: região do olécrano.
-
-8 e 9. Região antebraquial anterior e posterior:
-Anterior: flexores e nervo mediano.
-Posterior: extensores e nervo radial.
-
-10 e 11. Região carpal anterior e posterior:
-Anterior: túnel do carpo.
-Posterior: compartimentos extensores.
-
-12 a 15. Mão:
-Regiões palmar, dorsal, digitais palmares e digitais dorsais.
-Especialização para preensão e precisão.
-
-📚 Referências:
-Moore, Anatomia Orientada para a Clínica, 9ª edição.
-Netter, Atlas de Anatomia Humana, 7ª edição.
-Sobotta, Atlas de Anatomia Humana, 24ª edição.
-`;
-
+/* ========================
+   SOM CLICK
+======================== */
+function tocarClick() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.frequency.value = 600;
+    gain.gain.value = 0.08;
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start();
+    osc.stop(ctx.currentTime + 0.05);
+  } catch (e) {
+    console.log("Som não disponível neste navegador.");
+  }
+}
+
+document.addEventListener("click", e => {
+  if (e.target.tagName === "BUTTON") tocarClick();
+});
+
+/* ========================
+   UTIL
+======================== */
 function encontrarSecao(n) {
   return secoes.find(s => n >= s.inicio && n <= s.fim);
 }
 
+/* ========================
+   OBSERVAÇÕES
+======================== */
+function carregarObservacao() {
+  if (!observacaoTexto) return;
+  observacaoTexto.value = localStorage.getItem(`obs-${imagemAtual}`) || "";
+}
+
+function salvarObservacao() {
+  if (!observacaoTexto) return;
+  localStorage.setItem(`obs-${imagemAtual}`, observacaoTexto.value);
+  alert("Observação salva ✔");
+}
+
+/* ========================
+   IMAGEM
+======================== */
 function atualizarImagem() {
-  const secao = encontrarSecao(imagemAtual);
+  if (!atlasImage) return;
 
   atlasImage.src = `./imagens/${imagemAtual}.png`;
-  atlasImage.alt = `Imagem ${imagemAtual}`;
 
-  tituloImagem.textContent = modoProva
-    ? "Qual estrutura?"
-    : `Imagem ${imagemAtual} de ${totalImagens}`;
+  const secao = encontrarSecao(imagemAtual);
 
-  secaoAtual.textContent = secao ? secao.nome : "";
+  if (tituloImagem) {
+    tituloImagem.textContent = modoProva
+      ? "Qual estrutura?"
+      : `Imagem ${imagemAtual} de ${totalImagens}`;
+  }
+
+  if (secaoAtual) {
+    secaoAtual.textContent = secao?.nome || "";
+  }
 
   atualizarInfo();
   carregarObservacao();
 }
 
-function atualizarInfo() {
-  const secao = encontrarSecao(imagemAtual);
-
-  infoEstrutura.innerHTML = `
-    <strong>Imagem:</strong> ${imagemAtual}<br>
-    <strong>Seção:</strong> ${secao ? secao.nome : ""}<br><br>
-    <strong>Relação:</strong> Esta imagem pertence ao bloco ${secao ? secao.nome : ""}.<br>
-    <strong>Comparação:</strong> Compare com as imagens anteriores e posteriores.
-  `;
-}
-
+/* ========================
+   NAVEGAÇÃO
+======================== */
 function proximaImagem() {
   if (imagemAtual < totalImagens) {
     imagemAtual++;
@@ -493,75 +130,522 @@ function irParaImagem(n) {
   }
 }
 
+/* ========================
+   SEÇÕES
+======================== */
 function carregarSecoes() {
+  if (!secaoSelect) return;
+
   secaoSelect.innerHTML = "";
 
-  secoes.forEach(secao => {
+  secoes.forEach(s => {
     const opt = document.createElement("option");
-    opt.value = secao.inicio;
-    opt.textContent = `${secao.nome} (${secao.inicio}-${secao.fim})`;
+    opt.value = s.inicio;
+    opt.textContent = `${s.nome} (${s.inicio}-${s.fim})`;
     secaoSelect.appendChild(opt);
   });
 }
 
+/* ========================
+   ROTEIRO
+======================== */
 function carregarRoteiro() {
+  if (!listaRoteiro) return;
+
   listaRoteiro.innerHTML = "";
 
-  secoes.forEach(secao => {
+  secoes.forEach(s => {
     const div = document.createElement("div");
     div.className = "item-roteiro";
-    div.innerHTML = `<strong>${secao.nome}</strong><br>Imagens ${secao.inicio} até ${secao.fim}`;
+
+    div.innerHTML = `<strong>${s.nome}</strong><br>Imagens ${s.inicio} até ${s.fim}`;
 
     div.onclick = () => {
       mostrarAba("atlas");
-      irParaImagem(secao.inicio);
+      irParaImagem(s.inicio);
     };
 
     listaRoteiro.appendChild(div);
   });
 }
 
-function mostrarAba(nome) {
-  document.querySelectorAll(".aba").forEach(aba => aba.classList.remove("ativa"));
+/* ========================
+   INFORMAÇÕES POR SEÇÃO
+======================== */
+const infoSecoes = {
+  "Regiões": `
+🔴 REGIÕES DO MEMBRO SUPERIOR
 
-  const abas = {
+1. Região escapular:
+Área posterior da cintura escapular, relacionada à escápula, músculos trapézio, romboides, supraespinal, infraespinal e redondo maior/menor.
+
+2. Região deltóidea:
+Recobre o músculo deltóide. Relação profunda com o nervo axilar e artéria circunflexa posterior do úmero.
+
+3. Região peitoral:
+Área anterior do tórax, contendo peitoral maior, peitoral menor e fáscia clavipeitoral.
+
+4. Região braquial anterior:
+Compartimento flexor do braço. Contém bíceps braquial, braquial, coracobraquial e nervo musculocutâneo.
+
+5. Região braquial posterior:
+Compartimento extensor. Contém tríceps braquial, nervo radial e artéria braquial profunda.
+
+6. Região cubital anterior:
+Fossa cubital. Contém veia intermédia do cotovelo, tendão do bíceps, artéria braquial e nervo mediano.
+
+7. Região cubital posterior:
+Região do olécrano. Relacionada ao tríceps braquial e ao nervo ulnar.
+
+8. Região antebraquial anterior:
+Compartimento flexor/pronador. Relaciona-se aos nervos mediano e ulnar.
+
+9. Região antebraquial posterior:
+Compartimento extensor/supinador. Relaciona-se ao nervo radial.
+
+10. Região carpal anterior:
+Região do túnel do carpo. Contém retináculo dos flexores, nervo mediano e tendões flexores.
+
+11. Região carpal posterior:
+Dorso do punho. Contém retináculo dos extensores e tendões extensores.
+
+12. Região palmar:
+Face anterior da mão. Contém aponeurose palmar, arcos vasculares e nervos digitais.
+
+13. Região dorsal da mão:
+Face posterior da mão. Contém rede venosa dorsal e tendões extensores.
+
+14. Região digital palmar:
+Face anterior dos dedos. Relaciona-se aos tendões flexores e bainhas sinoviais.
+
+15. Região digital dorsal:
+Face posterior dos dedos. Relaciona-se às expansões extensoras.
+`,
+
+  "Fáscias": `
+🔴 FÁSCIAS DO MEMBRO SUPERIOR
+
+1. Fáscia peitoral:
+Reveste o músculo peitoral maior. Continua lateralmente com a fáscia braquial e profundamente relaciona-se à fáscia clavipeitoral.
+
+2. Fáscia clavipeitoral:
+Profunda ao peitoral maior. Envolve subclávio e peitoral menor. É atravessada pela veia cefálica, artéria toracoacromial e nervo peitoral lateral.
+
+3. Membrana costocoracoide:
+Parte espessada da fáscia clavipeitoral entre processo coracoide e primeira costela.
+
+4. Ligamento suspensor da axila:
+Extensão inferior da fáscia clavipeitoral até a fáscia axilar. Mantém a concavidade da axila.
+
+5. Fáscia axilar:
+Forma a base da axila. Relaciona-se superiormente com vasos axilares, plexo braquial e linfonodos.
+
+6. Fáscia deltóidea:
+Reveste o deltóide. Continua inferiormente com a fáscia braquial.
+
+7. Fáscia supraespinal:
+Reveste o músculo supraespinal na fossa supraespinal da escápula.
+
+8. Fáscia infraespinal:
+Reveste o músculo infraespinal na fossa infraespinal.
+
+9. Fáscia subescapular:
+Reveste o músculo subescapular na face anterior da escápula.
+
+10. Fáscia braquial:
+Envolve o braço e emite septos intermusculares medial e lateral.
+
+11. Septo intermuscular medial:
+Separa compartimentos anterior e posterior do braço. Relaciona-se ao nervo ulnar.
+
+12. Septo intermuscular lateral:
+Separa compartimentos anterior e posterior. Relaciona-se ao nervo radial.
+
+13. Compartimento anterior do braço:
+Contém bíceps braquial, braquial, coracobraquial e nervo musculocutâneo.
+
+14. Compartimento posterior do braço:
+Contém tríceps braquial, nervo radial e artéria braquial profunda.
+
+15. Fáscia do antebraço:
+Continuação da fáscia braquial. Envolve músculos flexores e extensores.
+
+16. Membrana interóssea:
+Entre rádio e ulna. Transmite forças e separa compartimentos profundos.
+
+17. Compartimento anterior do antebraço:
+Flexores e pronadores. Relaciona-se aos nervos mediano e ulnar.
+
+18. Compartimento posterior do antebraço:
+Extensores e supinadores. Relaciona-se ao nervo radial.
+
+19. Ligamento carpal palmar:
+Superficial ao retináculo dos flexores. Não forma o túnel do carpo.
+
+20. Retináculo dos flexores:
+Entre escafoide, trapézio, pisiforme e hamato. Forma o túnel do carpo.
+
+21. Fáscia palmar:
+Cobre a palma da mão.
+
+22. Fáscia tenar:
+Cobre músculos tenares na base do polegar.
+
+23. Fáscia hipotenar:
+Cobre músculos hipotenares na base do dedo mínimo.
+
+24. Aponeurose palmar:
+Espessamento central da fáscia palmar.
+
+25. Raios digitais longitudinais:
+Prolongamentos da aponeurose palmar para os dedos.
+
+26. Ligamento metacarpal transverso superficial:
+Une regiões metacarpais distais.
+
+27. Ligamentos cutâneos:
+Fixam pele à fáscia profunda.
+
+28. Retináculo dos extensores:
+No dorso do punho. Mantém tendões extensores em posição.
+
+29. Fáscia dorsal da mão:
+Fina e móvel. Permite acúmulo visível de edema.
+
+30. Túnel ulnar — Canal de Guyon:
+Entre pisiforme e hâmulo do hamato. Contém nervo ulnar e artéria ulnar.
+`,
+
+  "Regiões da axila": `
+🔴 REGIÕES DA AXILA
+
+1. Ápice da axila:
+Canal cervicoaxilar. Limitado pela clavícula, primeira costela e borda superior da escápula.
+Permite passagem da artéria axilar, veia axilar e plexo braquial.
+
+2. Base da axila:
+Formada por pele, tecido subcutâneo e fáscia axilar.
+Relaciona-se inferiormente com a concavidade axilar.
+
+3. Parede medial:
+Formada pela parede torácica e músculo serrátil anterior.
+Relaciona-se ao nervo torácico longo.
+Lesão causa escápula alada.
+
+4. Parede lateral:
+Formada pelo úmero, principalmente o sulco intertubercular.
+Relaciona-se com artéria axilar, veia axilar e cordões do plexo braquial.
+
+5. Parede anterior:
+Formada por peitoral maior, peitoral menor, subclávio e fáscia clavipeitoral.
+Relaciona-se com vasos toracoacromiais e veia cefálica.
+
+6. Parede posterior:
+Formada por subescapular, redondo maior e latíssimo do dorso.
+Relaciona-se com artéria subescapular, nervo axilar e artéria circunflexa posterior do úmero.
+
+7. Prega axilar:
+Anterior: peitoral maior.
+Posterior: latíssimo do dorso e redondo maior.
+Importante como limite clínico da axila.
+`,
+
+  "Vasos axilares": `
+🔴 VASOS AXILARES
+
+1. Artéria axilar:
+Continuação da artéria subclávia.
+Inicia na borda lateral da primeira costela e termina na borda inferior do redondo maior.
+Depois continua como artéria braquial.
+
+2. Primeira parte:
+Entre a primeira costela e a borda medial do peitoral menor.
+Ramo: artéria torácica superior.
+Relações: veia axilar medial, plexo braquial lateral, pleura posteriormente.
+
+3. Segunda parte:
+Posterior ao peitoral menor.
+Ramos: artéria toracoacromial e artéria torácica lateral.
+Relaciona-se intimamente com os fascículos lateral, medial e posterior do plexo braquial.
+
+4. Terceira parte:
+Da borda lateral do peitoral menor até a borda inferior do redondo maior.
+Ramos: subescapular, circunflexa anterior do úmero e circunflexa posterior do úmero.
+
+5. Artéria torácica superior:
+Supre músculos peitorais e parede torácica superior.
+
+6. Artéria toracoacromial:
+Perfura a fáscia clavipeitoral.
+Ramos: clavicular, acromial, deltoideo e peitoral.
+
+7. Artéria torácica lateral:
+Segue na parede medial da axila.
+Supre serrátil anterior, peitorais e mama lateral.
+
+8. Artéria subescapular:
+Maior ramo da artéria axilar.
+Divide-se em artéria circunflexa da escápula e artéria toracodorsal.
+
+9. Artéria circunflexa anterior do úmero:
+Contorna anteriormente o colo cirúrgico do úmero.
+Relaciona-se à cabeça do úmero e articulação do ombro.
+
+10. Artéria circunflexa posterior do úmero:
+Passa com o nervo axilar pelo espaço quadrangular.
+Risco em fratura do colo cirúrgico do úmero.
+
+11. Artéria circunflexa da escápula:
+Ramo da subescapular. Passa pela região escapular e participa da anastomose escapular.
+
+12. Artéria toracodorsal:
+Ramo da subescapular. Irriga o músculo latíssimo do dorso.
+
+13. Veia axilar:
+Medial e anterior à artéria axilar.
+Formada pela união das veias braquiais com a veia basílica.
+Recebe a veia cefálica.
+Continua como veia subclávia na borda lateral da primeira costela.
+`,
+
+  "Artérias do braço e antebraço": `
+🔴 ARTÉRIAS DO BRAÇO E ANTEBRAÇO
+
+1. Artéria braquial:
+Continuação da artéria axilar.
+Percorre o sulco bicipital medial.
+Termina na fossa cubital, dividindo-se em radial e ulnar.
+
+2. Artéria colateral ulnar superior:
+Segue com o nervo ulnar.
+Participa da rede arterial do cotovelo.
+
+3. Artéria colateral ulnar inferior:
+Origina-se próxima ao cotovelo.
+Anastomosa-se com artérias recorrentes ulnares.
+
+4. Artéria nutrícia do úmero:
+Penetra o forame nutrício do úmero.
+Nutre a diáfise umeral.
+
+5. Artéria braquial profunda:
+Acompanha o nervo radial no sulco radial do úmero.
+Supre o compartimento posterior do braço.
+
+6. Artéria colateral média:
+Ramo da braquial profunda.
+Participa da anastomose posterior do cotovelo.
+
+7. Artéria colateral radial:
+Ramo da braquial profunda.
+Anastomosa-se com a artéria recorrente radial.
+
+8. Artéria ulnar:
+Ramo medial terminal da braquial.
+Segue profunda aos músculos flexores.
+Forma principalmente o arco palmar superficial.
+
+9. Artéria recorrente ulnar anterior:
+Participa da anastomose anterior do cotovelo.
+
+10. Artéria recorrente ulnar posterior:
+Participa da anastomose medial/posterior do cotovelo.
+
+11. Artéria interóssea comum:
+Ramo da artéria ulnar.
+Divide-se em interóssea anterior e posterior.
+
+12. Artéria interóssea anterior:
+Desce na face anterior da membrana interóssea.
+Supre músculos flexores profundos.
+
+13. Artéria interóssea posterior:
+Passa para o compartimento posterior.
+Supre músculos extensores.
+
+14. Artéria interóssea recorrente:
+Participa da rede arterial do cotovelo.
+
+15. Artéria radial:
+Ramo lateral terminal da braquial.
+Segue no lado do polegar.
+Superficial no punho.
+Forma principalmente o arco palmar profundo.
+
+16. Artéria recorrente radial:
+Participa da anastomose lateral do cotovelo.
+`,
+
+  "Drenagem venosa superficial": `
+🔴 DRENAGEM VENOSA SUPERFICIAL
+
+1. Veias digitais dorsais:
+Drenam a face dorsal dos dedos.
+
+2. Veias metacarpais dorsais:
+Recebem as veias digitais dorsais.
+
+3. Arco venoso dorsal:
+Localizado no dorso da mão.
+
+4. Rede venosa dorsal:
+Principal origem das veias cefálica e basílica.
+
+5. Veia cefálica do antebraço:
+Sobe lateralmente no antebraço, no lado do polegar.
+
+6. Veia basílica do antebraço:
+Sobe medialmente no antebraço, no lado do dedo mínimo.
+
+7. Veia intermédia do antebraço:
+Variável. Pode drenar para cefálica, basílica ou intermédia do cotovelo.
+
+8. Veia intermédia do cotovelo:
+Localizada na fossa cubital.
+Conecta cefálica e basílica.
+Principal local de punção venosa.
+Superficial à aponeurose bicipital.
+
+9. Veia cefálica:
+Sobe lateralmente no braço.
+Passa pelo sulco deltopeitoral.
+Perfura a fáscia clavipeitoral.
+Desemboca na veia axilar.
+
+10. Veia basílica:
+Sobe medialmente.
+Perfura a fáscia braquial no braço.
+Une-se às veias braquiais para formar a veia axilar.
+`,
+
+  "Drenagem venosa profunda": `
+🔴 DRENAGEM VENOSA PROFUNDA
+
+1. Veias digitais palmares próprias:
+Acompanham as artérias digitais próprias.
+
+2. Veias digitais palmares comuns:
+Recebem drenagem das veias digitais próprias.
+
+3. Arco venoso palmar superficial:
+Profundo à aponeurose palmar.
+Relaciona-se ao arco arterial superficial.
+
+4. Veias metacarpais palmares:
+Entre os metacarpos.
+Drenam para os arcos venosos.
+
+5. Arco venoso palmar profundo:
+Junto aos metacarpos.
+Relaciona-se ao arco arterial profundo.
+
+6. Veias radiais:
+Acompanham a artéria radial no lado lateral do antebraço.
+
+7. Veias ulnares:
+Acompanham a artéria ulnar no lado medial do antebraço.
+
+8. Veias interósseas anteriores:
+Acompanham a artéria interóssea anterior na face anterior da membrana interóssea.
+
+9. Veias interósseas posteriores:
+Drenam o compartimento extensor do antebraço.
+
+10. Veias braquiais:
+Veias satélites da artéria braquial.
+Unem-se à veia basílica.
+
+11. Veia braquial profunda:
+Acompanha a artéria braquial profunda e o nervo radial.
+
+12. Veia axilar:
+Formada pela união das veias braquiais com a veia basílica.
+Recebe a veia cefálica.
+
+13. Veia subclávia:
+Continuação da veia axilar.
+Passa inferior à clavícula e anterior ao escaleno anterior.
+Drena para a veia braquiocefálica.
+`
+};
+
+/* ========================
+   INFO DA IMAGEM
+======================== */
+function atualizarInfo() {
+  if (!infoEstrutura) return;
+
+  const secao = encontrarSecao(imagemAtual);
+  const nomeSecao = secao?.nome || "";
+
+  infoEstrutura.innerHTML = `
+    <strong>Imagem:</strong> ${imagemAtual}<br>
+    <strong>Seção:</strong> ${nomeSecao}<br><br>
+    <pre style="white-space: pre-wrap; font-family: inherit;">${infoSecoes[nomeSecao] || "Informação anatômica ainda não cadastrada."}</pre>
+  `;
+}
+
+/* ========================
+   ABAS
+======================== */
+function mostrarAba(nome) {
+  document.querySelectorAll(".aba").forEach(a => a.classList.remove("ativa"));
+
+  const mapa = {
     atlas: "abaAtlas",
     roteiro: "abaRoteiro",
     relacoes: "abaRelacoes",
     saibaMais: "abaSaibaMais"
   };
 
-  const alvo = document.getElementById(abas[nome]);
-  if (alvo) alvo.classList.add("ativa");
+  document.getElementById(mapa[nome])?.classList.add("ativa");
 }
 
-function carregarObservacao() {
-  observacaoTexto.value = localStorage.getItem(`obs-${imagemAtual}`) || "";
-}
-
-function salvarObservacao() {
-  localStorage.setItem(`obs-${imagemAtual}`, observacaoTexto.value);
-  alert("Observação salva.");
-}
-
+/* ========================
+   ÁUDIO IMAGEM
+======================== */
 function ouvirImagem() {
   const secao = encontrarSecao(imagemAtual);
 
   const texto = modoProva
-    ? `Modo prova. Identifique a estrutura da imagem ${imagemAtual}.`
-    : `Imagem ${imagemAtual}. Seção ${secao ? secao.nome : ""}.`;
-
-  speechSynthesis.cancel();
+    ? "Identifique a estrutura"
+    : `Imagem ${imagemAtual}. ${secao?.nome || ""}`;
 
   const fala = new SpeechSynthesisUtterance(texto);
   fala.lang = "pt-BR";
+
+  speechSynthesis.cancel();
   speechSynthesis.speak(fala);
 }
 
-function ouvirSaibaMais() {
+/* ========================
+   SAIBA MAIS EM BOTÕES
+======================== */
+const topicosSaibaMais = {
+  regioes: infoSecoes["Regiões"],
+  fascias: infoSecoes["Fáscias"],
+  axila: infoSecoes["Regiões da axila"],
+  vasosAxilares: infoSecoes["Vasos axilares"],
+  arterias: infoSecoes["Artérias do braço e antebraço"],
+  venosaSuperficial: infoSecoes["Drenagem venosa superficial"],
+  venosaProfunda: infoSecoes["Drenagem venosa profunda"]
+};
+
+function abrirTopico(topico) {
+  topicoAtual = topico;
+  const el = document.getElementById("conteudoSaibaMais");
+
+  if (el) {
+    el.textContent = topicosSaibaMais[topico] || "Tópico não encontrado.";
+  }
+}
+
+function ouvirTopico() {
   speechSynthesis.cancel();
 
-  const fala = new SpeechSynthesisUtterance(textoSaibaMais);
+  const texto = topicosSaibaMais[topicoAtual] || "Escolha um tópico primeiro.";
+
+  const fala = new SpeechSynthesisUtterance(texto);
   fala.lang = "pt-BR";
   fala.rate = 0.9;
 
@@ -572,67 +656,52 @@ function pararAudio() {
   speechSynthesis.cancel();
 }
 
+/* ========================
+   MODO PROVA
+======================== */
 function ativarModoProva() {
   modoProva = !modoProva;
-  mostrarAba("atlas");
   atualizarImagem();
 }
 
+/* ========================
+   ZOOM
+======================== */
 function toggleZoom() {
+  if (!atlasImage) return;
   atlasImage.classList.toggle("zoom");
 }
 
+/* ========================
+   PDF
+======================== */
 function gerarPDFTodas() {
   const win = window.open("", "_blank");
 
-  let html = `<html><body style="font-family:Arial">`;
+  let html = `<html><body>`;
 
   for (let i = 1; i <= totalImagens; i++) {
-    const obs = localStorage.getItem(`obs-${i}`) || "";
-
-    html += `
-      <div style="page-break-after: always; text-align:center;">
-        <h2>Imagem ${i} de ${totalImagens}</h2>
-        <img src="./imagens/${i}.png" style="max-width:95%; max-height:80vh;">
-        <p style="text-align:left;">${obs}</p>
-      </div>
-    `;
+    html += `<img src="./imagens/${i}.png" style="width:100%"><hr>`;
   }
 
   html += `</body></html>`;
 
   win.document.write(html);
-  win.document.close();
 
-  setTimeout(() => win.print(), 1000);
+  setTimeout(() => win.print(), 800);
 }
 
-function tocarClick() {
-  try {
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-
-    osc.frequency.value = 650;
-    gain.gain.value = 0.05;
-
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-
-    osc.start();
-    osc.stop(ctx.currentTime + 0.04);
-  } catch (e) {}
-}
-
-document.addEventListener("click", e => {
-  if (e.target.tagName === "BUTTON") tocarClick();
+/* ========================
+   EVENTOS
+======================== */
+secaoSelect?.addEventListener("change", () => {
+  irParaImagem(secaoSelect.value);
 });
 
-secaoSelect.addEventListener("change", () => irParaImagem(secaoSelect.value));
-
-buscaInput.addEventListener("input", () => {
-  const valor = buscaInput.value.trim();
-  if (/^\d+$/.test(valor)) irParaImagem(valor);
+buscaInput?.addEventListener("input", () => {
+  if (/^\d+$/.test(buscaInput.value)) {
+    irParaImagem(buscaInput.value);
+  }
 });
 
 document.addEventListener("keydown", e => {
@@ -640,14 +709,9 @@ document.addEventListener("keydown", e => {
   if (e.key === "ArrowLeft") imagemAnterior();
 });
 
-document.getElementById("btnInstalar").addEventListener("click", () => {
-  alert("No celular, abra o menu do navegador e escolha: Adicionar à tela inicial.");
-});
-
-if (conteudoSaibaMais) {
-  conteudoSaibaMais.textContent = textoSaibaMais;
-}
-
+/* ========================
+   INIT
+======================== */
 carregarSecoes();
 carregarRoteiro();
 atualizarImagem();
