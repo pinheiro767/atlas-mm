@@ -659,7 +659,6 @@ Moore, Anatomia Orientada para a Clínica, 9ª edição.
 Netter, Atlas de Anatomia Humana, 7ª edição.
 Sobotta, Atlas de Anatomia Humana, 24ª edição.
 `;
-🔴 V. DRENAGEM VENOSA SUPERFICIAL — CONTINUAÇÃO
 
 🟥 Veia Cefálica
 
