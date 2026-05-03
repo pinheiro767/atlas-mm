@@ -1,4 +1,4 @@
-const CACHE_NAME = "ultra-atlas-mmss-v3";
+const CACHE_NAME = "ultra-atlas-mmss-v4";
 
 const arquivosBase = [
   "./",
