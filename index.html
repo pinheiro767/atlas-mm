@@ -10,6 +10,9 @@
   <link rel="manifest" href="./manifest.json" />
   <meta name="theme-color" content="#0b0f2a" />
 
+  <!-- Ícone da aba: evita erro favicon.ico 404 -->
+  <link rel="icon" href="./imagens/1.png" type="image/png" />
+
   <!-- CSS -->
   <link rel="stylesheet" href="./style.css" />
 </head>
@@ -40,7 +43,7 @@
     <section id="abaAtlas" class="aba ativa">
 
       <div class="filtros">
-        <select id="secaoSelect"></select>
+        <select id="secaoSelect" aria-label="Selecionar seção"></select>
         <input id="buscaInput" type="search" placeholder="Ir para imagem..." />
       </div>
 
@@ -52,16 +55,16 @@
       </div>
 
       <div class="controls">
-        <button onclick="imagemAnterior()">←</button>
-        <button onclick="proximaImagem()">→</button>
-        <button onclick="ouvirImagem()">🔊</button>
-        <button onclick="toggleZoom()">🔍</button>
+        <button type="button" onclick="imagemAnterior()">←</button>
+        <button type="button" onclick="proximaImagem()">→</button>
+        <button type="button" onclick="ouvirImagem()">🔊</button>
+        <button type="button" onclick="toggleZoom()">🔍</button>
       </div>
 
       <div class="observacoes">
-        <label>Observações</label>
-        <textarea id="observacaoTexto"></textarea>
-        <button onclick="salvarObservacao()">Salvar</button>
+        <label for="observacaoTexto">Observações</label>
+        <textarea id="observacaoTexto" placeholder="Digite suas observações..."></textarea>
+        <button type="button" onclick="salvarObservacao()">Salvar</button>
       </div>
 
     </section>
@@ -74,7 +77,7 @@
 
     <!-- RELAÇÕES -->
     <section id="abaRelacoes" class="aba">
-      <h2>Relações</h2>
+      <h2>Relações anatômicas</h2>
       <div id="infoEstrutura" class="card"></div>
     </section>
 
@@ -82,12 +85,24 @@
     <section id="abaSaibaMais" class="aba">
       <h2>Saiba Mais</h2>
 
-      <div class="controls">
-        <button onclick="ouvirSaibaMais()">🔊</button>
-        <button onclick="pararAudio()">⏹</button>
+      <div class="botoes-topicos">
+        <button type="button" onclick="abrirTopico('regioes')">Regiões</button>
+        <button type="button" onclick="abrirTopico('fascias')">Fáscias</button>
+        <button type="button" onclick="abrirTopico('axila')">Axila</button>
+        <button type="button" onclick="abrirTopico('vasosAxilares')">Vasos axilares</button>
+        <button type="button" onclick="abrirTopico('arterias')">Artérias</button>
+        <button type="button" onclick="abrirTopico('venosaSuperficial')">Veias superficiais</button>
+        <button type="button" onclick="abrirTopico('venosaProfunda')">Veias profundas</button>
       </div>
 
-      <div id="conteudoSaibaMais" class="card"></div>
+      <div class="controls">
+        <button type="button" onclick="ouvirTopico()">🔊 Ouvir tópico</button>
+        <button type="button" onclick="pararAudio()">⏹ Parar</button>
+      </div>
+
+      <div id="conteudoSaibaMais" class="card">
+        Toque em um botão acima para abrir o conteúdo.
+      </div>
     </section>
 
   </main>
@@ -95,12 +110,14 @@
   <!-- APP -->
   <script src="./app.js"></script>
 
-  <!-- SERVICE WORKER (ESSENCIAL) -->
+  <!-- SERVICE WORKER -->
   <script>
     if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("./sw.js")
-        .then(() => console.log("SW ativo"))
-        .catch(err => console.log("Erro SW:", err));
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./sw.js")
+          .then(() => console.log("SW ativo"))
+          .catch(err => console.log("Erro SW:", err));
+      });
     }
   </script>
 
