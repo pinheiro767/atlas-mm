@@ -206,6 +206,459 @@ function ouvirImagem() {
 ======================== */
 
 const textoSaibaMais = `
+VASOS + AXILA (LOCALIZAÇÃO EXATA + RELAÇÕES ANATÔMICAS FINAS)
+Baseado em Moore + Netter + Sobotta, com orientação clínica.
+
+🔴 I. VASOS AXILARES (ARTÉRIA AXILAR)
+
+📍 LOCALIZAÇÃO GERAL:
+Continuação da artéria subclávia.
+Inicia na borda lateral da 1ª costela.
+Termina na borda inferior do m. redondo maior → vira artéria braquial.
+
+📍 RELAÇÃO FUNDAMENTAL:
+A artéria é dividida em 3 partes pela posição em relação ao m. peitoral menor.
+
+🟥 1ª PARTE (PROXIMAL AO PEITORAL MENOR)
+
+📍 Localização exata:
+Entre:
+borda lateral da 1ª costela
+borda medial do peitoral menor
+
+🔗 Relações:
+anterior → fáscia clavipeitoral + peitoral maior
+posterior → pleura + pulmão (ápice)
+medial → veia axilar
+lateral → plexo braquial
+
+🩸 Ramo:
+a. torácica superior
+
+👉 Clínico:
+risco de pneumotórax em lesões profundas.
+
+🟥 2ª PARTE (POSTERIOR AO PEITORAL MENOR)
+
+📍 Localização exata:
+Profunda ao m. peitoral menor.
+
+🔗 Relações:
+rodeada pelos fascículos do plexo braquial:
+lateral
+medial
+posterior
+
+🩸 Ramos:
+a. toracoacromial
+a. torácica lateral
+
+👉 Clínico:
+compressões neurovasculares.
+
+🟥 3ª PARTE (DISTAL AO PEITORAL MENOR)
+
+📍 Localização exata:
+Entre:
+borda lateral do peitoral menor
+borda inferior do redondo maior
+
+🔗 Relações:
+posterior → subescapular, latíssimo do dorso
+lateral → úmero (colo cirúrgico)
+nervo axilar passa aqui
+
+🩸 Ramos:
+a. subescapular
+a. circunflexa anterior do úmero
+a. circunflexa posterior do úmero
+
+👉 Clínico:
+fratura do colo cirúrgico → lesão da circunflexa posterior + nervo axilar.
+
+🔴 II. VEIA AXILAR
+
+📍 Localização exata:
+medial à artéria axilar
+formada pela união:
+veias braquiais
+veia basílica
+
+🔗 Relações:
+anterior → peitoral maior
+posterior → artéria axilar
+medial → parede torácica
+
+👉 Clínico:
+acesso venoso central
+risco de embolia aérea
+
+🔴 III. ARTÉRIA BRAQUIAL
+
+📍 Localização exata:
+continuação da artéria axilar.
+Percorre o sulco bicipital medial.
+
+🔗 Relações:
+lateral → bíceps braquial
+medial → nervo mediano
+profunda → úmero
+
+🩸 Ramos importantes:
+a. braquial profunda
+colaterais ulnar superior e inferior
+
+👉 Clínico:
+ponto de aferição da pressão arterial.
+fraturas supracondilares → risco de isquemia.
+
+🔴 IV. ARTÉRIAS DO ANTEBRAÇO
+
+🟥 Artéria radial
+📍 Localização:
+lateral, lado do polegar.
+Passa anterior ao rádio.
+Superficial no punho.
+Forma o arco palmar profundo.
+
+🟥 Artéria ulnar
+📍 Localização:
+medial, lado do dedo mínimo.
+Profunda aos músculos flexores.
+Forma o arco palmar superficial.
+
+🟥 Artérias interósseas
+📍 Localização:
+ao longo da membrana interóssea.
+
+🔗 Dividem-se em:
+anterior → compartimento flexor
+posterior → compartimento extensor
+
+🔴 V. DRENAGEM VENOSA SUPERFICIAL
+
+🟥 Rede venosa dorsal
+
+📍 Localização:
+dorso da mão
+superficial à fáscia dorsal
+
+👉 Origina:
+veia cefálica lateral
+veia basílica medial
+
+🟥 Veia cefálica
+
+📍 Localização exata:
+Origina-se na rede venosa dorsal da mão, no lado lateral.
+Sobe pelo lado lateral do antebraço.
+Passa anterior ao cotovelo, no sulco bicipital lateral.
+Continua no braço entre o m. deltóide e o m. peitoral maior.
+Penetra a fáscia clavipeitoral no triângulo deltopeitoral.
+Desemboca na veia axilar.
+
+🔗 Relações finas:
+superficial → pele e tecido subcutâneo
+profunda → fáscia braquial
+próxima ao nervo cutâneo lateral do antebraço
+
+👉 Clínico:
+acesso venoso
+via para cateter venoso central
+visível em indivíduos magros
+
+🟥 Veia basílica
+
+📍 Localização exata:
+Origina-se na rede venosa dorsal, no lado medial.
+Sobe pelo lado medial do antebraço.
+No braço, perfura a fáscia braquial no terço médio.
+Une-se às veias braquiais → forma a veia axilar.
+
+🔗 Relações:
+próxima ao nervo cutâneo medial do antebraço
+profunda no braço, diferente da cefálica
+
+👉 Clínico:
+acesso venoso profundo
+menos visível e mais protegida
+
+🟥 Veia intermédia do cotovelo
+
+📍 Localização exata:
+na fossa cubital.
+Conecta:
+veia cefálica
+veia basílica
+
+🔗 Relações:
+superficial à aponeurose bicipital.
+Profunda:
+artéria braquial
+nervo mediano
+
+👉 Clínico:
+principal local de punção venosa.
+A aponeurose protege estruturas profundas.
+
+🔴 VI. DRENAGEM VENOSA PROFUNDA
+
+🟥 Veias digitais palmares:
+ao lado das artérias digitais, nos dedos.
+Drenam para veias metacarpais.
+
+🟥 Veias metacarpais palmares:
+entre os metacarpos, profundas na palma.
+Drenam para arcos venosos.
+
+🟥 Arco venoso palmar superficial:
+superficial aos tendões flexores.
+Profundo à aponeurose palmar.
+Formado principalmente pela veia ulnar.
+
+🟥 Arco venoso palmar profundo:
+profundo aos tendões flexores.
+Junto aos ossos metacarpais.
+Acompanha o arco arterial profundo.
+
+🟥 Veias radiais:
+acompanham a artéria radial.
+Lado lateral do antebraço.
+
+🟥 Veias ulnares:
+acompanham a artéria ulnar.
+Lado medial do antebraço.
+
+🟥 Veias interósseas:
+ao longo da membrana interóssea.
+Drenam compartimentos profundos.
+
+🟥 Veias braquiais:
+veias satélites da artéria braquial.
+No sulco bicipital medial.
+Unem-se à basílica → formam veia axilar.
+
+🟥 Veia axilar:
+medial à artéria axilar.
+Da borda inferior do redondo maior até a 1ª costela.
+Continua como veia subclávia.
+
+🟥 Veia subclávia:
+anterior ao músculo escaleno anterior.
+Inferior à clavícula.
+Drena para veia braquiocefálica.
+
+👉 Clínico:
+acesso venoso central
+risco de pneumotórax
+
+🔴 FÁSCIAS DO MEMBRO SUPERIOR — LOCALIZAÇÃO E RELAÇÕES EXATAS
+
+🟥 1. Fáscia peitoral
+Reveste diretamente o músculo peitoral maior.
+Estende-se da clavícula → esterno → cartilagens costais → fáscia do braço.
+
+🔗 Proximidades:
+superior → clavícula
+medial → esterno
+lateral → continua com fáscia braquial
+profunda → separa-se da clavipeitoral
+
+👉 Clínico:
+via de disseminação de infecção torácica para axila.
+
+🟥 2. Fáscia clavipeitoral
+Situada profunda ao peitoral maior.
+Entre músculo subclávio e músculo peitoral menor.
+
+🔗 Atravessada por:
+v. cefálica
+a. toracoacromial
+nervo peitoral lateral
+
+Continuidade inferior → ligamento suspensor da axila.
+
+👉 Clínico:
+referência em acesso cirúrgico axilar.
+
+🟥 3. Membrana costocoracoide
+Parte espessada da fáscia clavipeitoral.
+Entre processo coracoide e 1ª costela.
+
+🔗 Proximidades:
+anterior → peitoral maior
+posterior → plexo braquial e vasos axilares
+
+👉 Clínico:
+ponto de compressão neurovascular.
+
+🟥 4. Ligamento suspensor da axila
+Extensão inferior da fáscia clavipeitoral.
+Vai até a fáscia axilar.
+Mantém a concavidade da axila.
+
+🟥 5. Fáscia axilar
+Forma o assoalho da axila.
+Entre as pregas anterior e posterior.
+
+🔗 Proximidades:
+superior → vasos e plexo braquial
+inferior → pele
+lateral → úmero
+
+🟥 6. Fáscia deltóidea
+Reveste o músculo deltóide.
+Origina-se da clavícula, acrômio e espinha da escápula.
+Continua inferiormente com a fáscia braquial.
+
+🟥 7–9. Fáscias escapulares
+Supraespinal → fossa supraespinal.
+Infraespinal → fossa infraespinal.
+Subescapular → face anterior da escápula.
+
+Relacionam-se com manguito rotador e articulação do ombro.
+
+🟥 10. Fáscia do braço
+Envolve todo o braço como um cilindro.
+Divide em:
+compartimento anterior flexor
+compartimento posterior extensor
+
+👉 Clínico:
+síndrome compartimental.
+
+🟥 11–12. Septos intermusculares
+Ligam a fáscia braquial ao úmero.
+Dividem compartimentos medial e lateral.
+
+🔗 Proximidades:
+nervo radial
+artéria braquial
+
+🟥 13–14. Compartimentos do braço
+Anterior:
+bíceps
+braquial
+nervo musculocutâneo
+
+Posterior:
+tríceps
+nervo radial
+
+🟥 15. Fáscia do antebraço
+Continuação da fáscia braquial.
+Reveste rádio e ulna.
+Espessamentos distais: retináculos.
+
+🟥 16. Membrana interóssea
+Entre rádio e ulna.
+Fibras oblíquas.
+Função: transmissão de força e estabilidade.
+
+🟥 17–18. Compartimentos do antebraço
+Anterior:
+flexores
+nervo mediano
+
+Posterior:
+extensores
+nervo radial
+
+🟥 19. Ligamento carpal palmar
+Superficial ao retináculo dos flexores.
+Não forma túnel do carpo.
+
+🟥 20. Retináculo dos flexores
+Entre:
+tubérculo do escafoide/trapézio
+pisiforme/hamato
+
+Forma o túnel do carpo.
+
+Conteúdo:
+nervo mediano
+tendões flexores
+
+🟥 21–24. Fáscias palmares
+fáscia palmar → cobre palma
+tenar → base do polegar
+hipotenar → base do dedo mínimo
+aponeurose palmar → estrutura central espessa
+
+👉 Clínico:
+contratura de Dupuytren.
+
+🟥 25–27. Estruturas digitais
+raios digitais
+ligamentos metacarpais
+ligamentos cutâneos
+
+Função:
+estabilidade da preensão.
+
+🟥 28. Retináculo dos extensores
+Dorso do punho.
+Fixado ao rádio e ulna.
+Divide em 6 compartimentos tendíneos.
+
+🟥 29. Fáscia dorsal da mão
+Fina e móvel.
+Permite edema visível.
+
+🟥 30. Túnel ulnar — Canal de Guyon
+Entre pisiforme e hamato.
+
+Conteúdo:
+nervo ulnar
+artéria ulnar
+
+👉 Clínico:
+compressão → mão em garra.
+
+🔴 REGIÕES DO MEMBRO SUPERIOR
+
+1. Região escapular:
+Área posterior da cintura escapular envolvendo escápula, trapézio e romboides.
+Clínico: lesão do nervo acessório pode causar fraqueza do trapézio.
+
+2. Região deltóidea:
+Recobre o músculo deltóide.
+Clínico: local de aplicação intramuscular.
+
+3. Região peitoral:
+Área anterior do tórax, com peitoral maior e menor.
+Clínico: acesso cirúrgico axilar e drenagem mamária.
+
+4–5. Região braquial anterior/posterior:
+Anterior → compartimento flexor.
+Posterior → compartimento extensor.
+Clínico: lesão do nervo radial → incapacidade de extensão.
+
+6–7. Região cubital anterior/posterior:
+Anterior → fossa cubital.
+Posterior → região do olécrano.
+
+8–9. Região antebraquial anterior/posterior:
+Anterior → flexores e nervo mediano.
+Posterior → extensores e nervo radial.
+
+10–11. Região carpal anterior/posterior:
+Anterior → túnel do carpo.
+Posterior → compartimentos extensores.
+
+12–15. Mão:
+palmar
+dorsal
+digitais palmares
+digitais dorsais
+
+Especialização para preensão e precisão.
+
+📚 BASE CIENTÍFICA:
+Moore, Anatomia Orientada para a Clínica, 9ª edição.
+Netter, Atlas de Anatomia Humana, 7ª edição.
+Sobotta, Atlas de Anatomia Humana, 24ª edição.
+`;
 🔴 V. DRENAGEM VENOSA SUPERFICIAL — CONTINUAÇÃO
 
 🟥 Veia Cefálica
