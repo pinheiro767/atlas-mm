@@ -13,8 +13,8 @@ const secoes = [
   { nome: "Regiões", inicio: 1, fim: 5 },
   { nome: "Fáscias", inicio: 6, fim: 38 },
   { nome: "Regiões da axila", inicio: 39, fim: 46 },
-  { nome: "Vasos axilares", inicio: 47, fim: 69 },
-  { nome: "Artérias do braço e antebraço", inicio: 70, fim: 105 },
+  { nome: "Vasos axilares", inicio: 47, fim: 64 },
+  { nome: "Artérias do braço e antebraço", inicio: 65, fim: 105 },
   { nome: "Drenagem venosa superficial", inicio: 106, fim: 129 },
   { nome: "Drenagem venosa profunda", inicio: 130, fim: 159 }
 ];
