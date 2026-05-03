@@ -256,10 +256,12 @@ Reveste o músculo subescapular na face anterior da escápula.
 Envolve o braço e emite septos intermusculares medial e lateral.
 
 11. Septo intermuscular medial:
-Separa compartimentos anterior e posterior do braço. Relaciona-se ao nervo ulnar.
+Separa compartimentos anterior e posterior do braço.O septo intermuscular medial do braço fica entre:
+m. braquial (anterior) e m. tríceps braquial – cabeça medial (posterior). Relaciona-se ao nervo ulnar.
 
 12. Septo intermuscular lateral:
-Separa compartimentos anterior e posterior. Relaciona-se ao nervo radial.
+Separa compartimentos anterior e posterior. O septo intermuscular lateral separa:
+m. braquial (anterior) e m. tríceps braquial – cabeça lateral (posterior). Relaciona-se ao nervo radial.
 
 13. Compartimento anterior do braço:
 Contém bíceps braquial, braquial, coracobraquial e nervo musculocutâneo.
