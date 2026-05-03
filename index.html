@@ -6,11 +6,16 @@
 
   <title>Ultra Atlas MMSS</title>
 
+  <!-- PWA -->
   <link rel="manifest" href="./manifest.json" />
+  <meta name="theme-color" content="#0b0f2a" />
+
+  <!-- CSS -->
   <link rel="stylesheet" href="./style.css" />
 </head>
 
 <body>
+
   <header class="topbar">
     <div>
       <h1>Ultra Atlas MMSS</h1>
@@ -23,17 +28,20 @@
   <nav class="menu">
     <button type="button" onclick="mostrarAba('atlas')">Atlas</button>
     <button type="button" onclick="mostrarAba('roteiro')">Roteiro</button>
-    <button type="button" onclick="mostrarAba('relacoes')">Relações e Comparações</button>
+    <button type="button" onclick="mostrarAba('relacoes')">Relações</button>
     <button type="button" onclick="mostrarAba('saibaMais')">Saiba Mais</button>
     <button type="button" onclick="ativarModoProva()">Modo Prova</button>
-    <button type="button" onclick="gerarPDFTodas()">Gerar PDF completo</button>
+    <button type="button" onclick="gerarPDFTodas()">PDF</button>
   </nav>
 
   <main>
+
+    <!-- ATLAS -->
     <section id="abaAtlas" class="aba ativa">
+
       <div class="filtros">
         <select id="secaoSelect"></select>
-        <input id="buscaInput" type="search" placeholder="Buscar por número..." />
+        <input id="buscaInput" type="search" placeholder="Ir para imagem..." />
       </div>
 
       <h2 id="tituloImagem">Imagem 1 de 159</h2>
@@ -44,44 +52,57 @@
       </div>
 
       <div class="controls">
-        <button type="button" onclick="imagemAnterior()">← Anterior</button>
-        <button type="button" onclick="proximaImagem()">Próxima →</button>
-        <button type="button" onclick="ouvirImagem()">🔊 Ouvir</button>
-        <button type="button" onclick="toggleZoom()">🔍 Zoom</button>
+        <button onclick="imagemAnterior()">←</button>
+        <button onclick="proximaImagem()">→</button>
+        <button onclick="ouvirImagem()">🔊</button>
+        <button onclick="toggleZoom()">🔍</button>
       </div>
 
       <div class="observacoes">
-        <label for="observacaoTexto">Observações da imagem</label>
-        <textarea
-          id="observacaoTexto"
-          placeholder="Digite observações, relações anatômicas, detalhes da peça..."
-        ></textarea>
-        <button type="button" onclick="salvarObservacao()">💾 Salvar observação</button>
+        <label>Observações</label>
+        <textarea id="observacaoTexto"></textarea>
+        <button onclick="salvarObservacao()">Salvar</button>
       </div>
+
     </section>
 
+    <!-- ROTEIRO -->
     <section id="abaRoteiro" class="aba">
-      <h2>Roteiro do Atlas</h2>
+      <h2>Roteiro</h2>
       <div id="listaRoteiro"></div>
     </section>
 
+    <!-- RELAÇÕES -->
     <section id="abaRelacoes" class="aba">
-      <h2>Relações e Comparações Rápidas</h2>
+      <h2>Relações</h2>
       <div id="infoEstrutura" class="card"></div>
     </section>
 
+    <!-- SAIBA MAIS -->
     <section id="abaSaibaMais" class="aba">
-      <h2>Saiba Mais — Anatomia Clínica e Relações Finas</h2>
+      <h2>Saiba Mais</h2>
 
       <div class="controls">
-        <button type="button" onclick="ouvirSaibaMais()">🔊 Ouvir Saiba Mais</button>
-        <button type="button" onclick="pararAudio()">⏹️ Parar áudio</button>
+        <button onclick="ouvirSaibaMais()">🔊</button>
+        <button onclick="pararAudio()">⏹</button>
       </div>
 
-      <div id="conteudoSaibaMais" class="card saiba-mais"></div>
+      <div id="conteudoSaibaMais" class="card"></div>
     </section>
+
   </main>
 
+  <!-- APP -->
   <script src="./app.js"></script>
+
+  <!-- SERVICE WORKER (ESSENCIAL) -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("./sw.js")
+        .then(() => console.log("SW ativo"))
+        .catch(err => console.log("Erro SW:", err));
+    }
+  </script>
+
 </body>
 </html>
